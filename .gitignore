@@ -1,0 +1,8 @@
+node_modules/
+package.json
+package-lock.json
+.DS_Store
+*.test
+coverage.out
+
+.claude
