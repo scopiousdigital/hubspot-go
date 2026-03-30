@@ -10,7 +10,6 @@ import (
 )
 
 const eventsBasePath = "/marketing/v3/marketing-events"
-const eventsV2BasePath = "/marketing/v3/marketing-events-beta"
 
 // EventsService handles operations on HubSpot marketing events.
 // It covers the BasicApi, BatchApi, ChangePropertyApi, IdentifiersApi,

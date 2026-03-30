@@ -120,5 +120,5 @@ func TestHTTPClient_ContentTypeHeaders(t *testing.T) {
 	})
 
 	var result map[string]any
-	client.httpClient.Get(context.Background(), "/test", nil, &result)
+	_ = client.httpClient.Get(context.Background(), "/test", nil, &result)
 }

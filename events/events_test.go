@@ -113,7 +113,7 @@ func TestEvents_List(t *testing.T) {
 			t.Errorf("objectType = %q, want contact", ot)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, events.EventsListResult{
+		_, _ = w.Write(mustJSON(t, events.EventsListResult{
 			Results: []*events.ExternalUnifiedEvent{
 				{ID: "evt1", EventType: "click", ObjectID: "123", ObjectType: "contact", OccurredAt: time.Now()},
 			},
@@ -139,7 +139,7 @@ func TestEvents_GetTypes(t *testing.T) {
 
 	mux.HandleFunc("/events/v3/events/event-types", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, events.VisibleExternalEventTypeNames{
+		_, _ = w.Write(mustJSON(t, events.VisibleExternalEventTypeNames{
 			EventTypes: []string{"click", "view"},
 		}))
 	})
@@ -163,7 +163,7 @@ func TestEvents_Send(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input events.BehavioralEventHttpCompletionRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.EventName != "pe12345_test_event" {
 			t.Errorf("eventName = %q", input.EventName)
 		}
@@ -189,7 +189,7 @@ func TestEvents_SendBatch(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input events.BatchedBehavioralEventHttpCompletionRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if len(input.Inputs) != 2 {
 			t.Errorf("inputs = %d, want 2", len(input.Inputs))
 		}

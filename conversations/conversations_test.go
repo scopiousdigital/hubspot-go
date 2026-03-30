@@ -110,7 +110,7 @@ func TestVisitorIdentification_GenerateToken(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input conversations.IdentificationTokenGenerationRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Email != "visitor@example.com" {
 			t.Errorf("email = %q", input.Email)
 		}
@@ -118,7 +118,7 @@ func TestVisitorIdentification_GenerateToken(t *testing.T) {
 			t.Errorf("firstName = %q", input.FirstName)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, conversations.IdentificationTokenResponse{
+		_, _ = w.Write(mustJSON(t, conversations.IdentificationTokenResponse{
 			Token: "tok_abc123",
 		}))
 	})
