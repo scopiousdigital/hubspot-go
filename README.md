@@ -1,5 +1,11 @@
 # hubspot-go
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/scopiousdigital/hubspot-go.svg)](https://pkg.go.dev/github.com/scopiousdigital/hubspot-go)
+[![CI](https://github.com/scopiousdigital/hubspot-go/actions/workflows/ci.yml/badge.svg)](https://github.com/scopiousdigital/hubspot-go/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/scopiousdigital/hubspot-go)](https://goreportcard.com/report/github.com/scopiousdigital/hubspot-go)
+<!-- [![codecov](https://codecov.io/gh/scopiousdigital/hubspot-go/branch/main/graph/badge.svg)](https://codecov.io/gh/scopiousdigital/hubspot-go) -->
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 A Go client library for the [HubSpot API](https://developers.hubspot.com/docs/api/overview), ported from the official [@hubspot/api-client](https://www.npmjs.com/package/@hubspot/api-client) Node.js package.
 
 ## Installation
