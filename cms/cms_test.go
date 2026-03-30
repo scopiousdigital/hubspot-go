@@ -118,12 +118,12 @@ func TestBlogPosts_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input cms.BlogPost
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Name != "My Blog Post" {
 			t.Errorf("name = %q, want 'My Blog Post'", input.Name)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, cms.BlogPost{
+		_, _ = w.Write(mustJSON(t, cms.BlogPost{
 			ID:   "101",
 			Name: "My Blog Post",
 			Slug: "my-blog-post",
@@ -152,7 +152,7 @@ func TestBlogPosts_GetByID(t *testing.T) {
 		if r.Method != http.MethodGet {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
-		w.Write(mustJSON(t, cms.BlogPost{
+		_, _ = w.Write(mustJSON(t, cms.BlogPost{
 			ID:   "101",
 			Name: "My Blog Post",
 		}))
@@ -175,7 +175,7 @@ func TestBlogPosts_Update(t *testing.T) {
 		if r.Method != http.MethodPatch {
 			t.Errorf("method = %s, want PATCH", r.Method)
 		}
-		w.Write(mustJSON(t, cms.BlogPost{
+		_, _ = w.Write(mustJSON(t, cms.BlogPost{
 			ID:   "101",
 			Name: "Updated Post",
 		}))
@@ -220,7 +220,7 @@ func TestBlogPosts_List(t *testing.T) {
 		if limit := r.URL.Query().Get("limit"); limit != "10" {
 			t.Errorf("limit = %q, want 10", limit)
 		}
-		w.Write(mustJSON(t, cms.BlogPostListResult{
+		_, _ = w.Write(mustJSON(t, cms.BlogPostListResult{
 			Total: 2,
 			Results: []*cms.BlogPost{
 				{ID: "1", Name: "Post 1"},
@@ -249,11 +249,11 @@ func TestBlogPosts_BatchCreate(t *testing.T) {
 	mux.HandleFunc("/cms/v3/blogs/posts/batch/create", func(w http.ResponseWriter, r *http.Request) {
 		body, _ := io.ReadAll(r.Body)
 		var input cms.BatchInputBlogPost
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if len(input.Inputs) != 2 {
 			t.Errorf("inputs = %d, want 2", len(input.Inputs))
 		}
-		w.Write(mustJSON(t, cms.BatchResponseBlogPost{
+		_, _ = w.Write(mustJSON(t, cms.BatchResponseBlogPost{
 			Status:      "COMPLETE",
 			Results:     []*cms.BlogPost{{ID: "1"}, {ID: "2"}},
 			StartedAt:   time.Now(),
@@ -328,7 +328,7 @@ func TestBlogAuthors_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, cms.BlogAuthor{
+		_, _ = w.Write(mustJSON(t, cms.BlogAuthor{
 			ID:       "201",
 			FullName: "John Doe",
 		}))
@@ -357,7 +357,7 @@ func TestBlogTags_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, cms.BlogTag{
+		_, _ = w.Write(mustJSON(t, cms.BlogTag{
 			ID:   "301",
 			Name: "Go",
 		}))
@@ -382,7 +382,7 @@ func TestBlogTags_List(t *testing.T) {
 		if r.Method != http.MethodGet {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
-		w.Write(mustJSON(t, cms.BlogTagListResult{
+		_, _ = w.Write(mustJSON(t, cms.BlogTagListResult{
 			Total:   1,
 			Results: []*cms.BlogTag{{ID: "301", Name: "Go"}},
 		}))
@@ -408,7 +408,7 @@ func TestTables_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, cms.HubDbTable{
+		_, _ = w.Write(mustJSON(t, cms.HubDbTable{
 			ID:    "401",
 			Name:  "my_table",
 			Label: "My Table",
@@ -432,7 +432,7 @@ func TestTables_GetDetails(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/hubdb/tables/my_table", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.HubDbTable{
+		_, _ = w.Write(mustJSON(t, cms.HubDbTable{
 			ID:   "401",
 			Name: "my_table",
 		}))
@@ -455,7 +455,7 @@ func TestTables_Publish(t *testing.T) {
 		if r.Method != http.MethodPost {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
-		w.Write(mustJSON(t, cms.HubDbTable{
+		_, _ = w.Write(mustJSON(t, cms.HubDbTable{
 			ID:        "401",
 			Published: true,
 		}))
@@ -498,7 +498,7 @@ func TestRows_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, cms.HubDbTableRow{
+		_, _ = w.Write(mustJSON(t, cms.HubDbTableRow{
 			ID:     "501",
 			Values: map[string]any{"name": "Row 1"},
 		}))
@@ -523,7 +523,7 @@ func TestRows_List(t *testing.T) {
 		if r.Method != http.MethodGet {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
-		w.Write(mustJSON(t, cms.HubDbRowListResult{
+		_, _ = w.Write(mustJSON(t, cms.HubDbRowListResult{
 			Total: 1,
 			Results: []*cms.HubDbTableRow{
 				{ID: "501", Values: map[string]any{"name": "Row 1"}},
@@ -564,7 +564,7 @@ func TestDomains_GetByID(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/domains/601", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.Domain{
+		_, _ = w.Write(mustJSON(t, cms.Domain{
 			ID:     "601",
 			Domain: "example.com",
 		}))
@@ -584,7 +584,7 @@ func TestDomains_List(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/domains", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.DomainListResult{
+		_, _ = w.Write(mustJSON(t, cms.DomainListResult{
 			Total: 1,
 			Results: []*cms.Domain{
 				{ID: "601", Domain: "example.com"},
@@ -612,7 +612,7 @@ func TestLandingPages_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, cms.Page{
+		_, _ = w.Write(mustJSON(t, cms.Page{
 			ID:   "701",
 			Name: "My Landing Page",
 		}))
@@ -634,7 +634,7 @@ func TestSitePages_List(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/pages/site-pages", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.PageListResult{
+		_, _ = w.Write(mustJSON(t, cms.PageListResult{
 			Total: 1,
 			Results: []*cms.Page{
 				{ID: "801", Name: "About"},
@@ -673,7 +673,7 @@ func TestLandingPages_ABTest(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/pages/landing-pages/ab-test/create-variation", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.Page{
+		_, _ = w.Write(mustJSON(t, cms.Page{
 			ID:   "702",
 			Name: "Variation B",
 		}))
@@ -700,7 +700,7 @@ func TestAuditLogs_List(t *testing.T) {
 		if r.URL.Query().Get("eventType") != "CREATED" {
 			t.Errorf("eventType = %q, want CREATED", r.URL.Query().Get("eventType"))
 		}
-		w.Write(mustJSON(t, cms.AuditLogListResult{
+		_, _ = w.Write(mustJSON(t, cms.AuditLogListResult{
 			Results: []*cms.PublicAuditLog{
 				{
 					ObjectName: "My Post",
@@ -734,7 +734,7 @@ func TestUrlRedirects_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, cms.UrlMapping{
+		_, _ = w.Write(mustJSON(t, cms.UrlMapping{
 			ID:            "901",
 			RoutePrefix:   "/old-page",
 			Destination:   "/new-page",
@@ -763,7 +763,7 @@ func TestUrlRedirects_GetByID(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/url-redirects/901", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.UrlMapping{
+		_, _ = w.Write(mustJSON(t, cms.UrlMapping{
 			ID:          "901",
 			RoutePrefix: "/old-page",
 			Destination: "/new-page",
@@ -803,7 +803,7 @@ func TestSourceCode_GetMetadata(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/source-code/publish/metadata/templates/home.html", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.AssetFileMetadata{
+		_, _ = w.Write(mustJSON(t, cms.AssetFileMetadata{
 			ID:        "f1",
 			Name:      "home.html",
 			Folder:    false,
@@ -843,7 +843,7 @@ func TestSourceCode_Extract(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/source-code/extract/async", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.TaskLocator{ID: 12345}))
+		_, _ = w.Write(mustJSON(t, cms.TaskLocator{ID: 12345}))
 	})
 
 	task, err := svc.SourceCode.Extract.Extract(context.Background(), &cms.FileExtractRequest{
@@ -881,7 +881,7 @@ func TestSiteSearch_Search(t *testing.T) {
 		if q := r.URL.Query().Get("q"); q != "hubspot" {
 			t.Errorf("q = %q, want hubspot", q)
 		}
-		w.Write(mustJSON(t, cms.SearchResults{
+		_, _ = w.Write(mustJSON(t, cms.SearchResults{
 			Total:  1,
 			Limit:  10,
 			Offset: 0,
@@ -921,7 +921,7 @@ func TestSiteSearch_GetByID(t *testing.T) {
 		if ct := r.URL.Query().Get("type"); ct != "BLOG_POST" {
 			t.Errorf("type = %q, want BLOG_POST", ct)
 		}
-		w.Write(mustJSON(t, cms.IndexedData{
+		_, _ = w.Write(mustJSON(t, cms.IndexedData{
 			ID:   "abc123",
 			Type: "BLOG_POST",
 		}))
@@ -946,7 +946,7 @@ func TestPerformance_GetPage(t *testing.T) {
 		if d := r.URL.Query().Get("domain"); d != "example.com" {
 			t.Errorf("domain = %q, want example.com", d)
 		}
-		w.Write(mustJSON(t, cms.PerformanceResponse{
+		_, _ = w.Write(mustJSON(t, cms.PerformanceResponse{
 			Domain:        "example.com",
 			Interval:      "ONE_HOUR",
 			StartInterval: 1704067200,
@@ -984,7 +984,7 @@ func TestPerformance_GetUptime(t *testing.T) {
 	defer teardown()
 
 	mux.HandleFunc("/cms/v3/performance/uptime", func(w http.ResponseWriter, r *http.Request) {
-		w.Write(mustJSON(t, cms.PerformanceResponse{
+		_, _ = w.Write(mustJSON(t, cms.PerformanceResponse{
 			Interval:      "ONE_DAY",
 			StartInterval: 1704067200,
 			EndInterval:   1704153600,

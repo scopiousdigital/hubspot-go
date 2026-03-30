@@ -109,7 +109,7 @@ func TestBusinessUnits_GetByUserID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, settings.BusinessUnitsResult{
+		_, _ = w.Write(mustJSON(t, settings.BusinessUnitsResult{
 			Results: []*settings.PublicBusinessUnit{
 				{ID: "bu1", Name: "Main Unit"},
 			},
@@ -138,12 +138,12 @@ func TestUsers_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input settings.UserProvisionRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Email != "new@example.com" {
 			t.Errorf("email = %q", input.Email)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, settings.PublicUser{
+		_, _ = w.Write(mustJSON(t, settings.PublicUser{
 			ID:    "u1",
 			Email: "new@example.com",
 		}))
@@ -169,7 +169,7 @@ func TestUsers_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, settings.PublicUser{ID: "u1", Email: "test@example.com"}))
+		_, _ = w.Write(mustJSON(t, settings.PublicUser{ID: "u1", Email: "test@example.com"}))
 	})
 
 	user, err := svc.Users.GetByID(context.Background(), "u1", "")
@@ -190,7 +190,7 @@ func TestUsers_List(t *testing.T) {
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, settings.UsersListResult{
+		_, _ = w.Write(mustJSON(t, settings.UsersListResult{
 			Results: []*settings.PublicUser{
 				{ID: "u1", Email: "a@test.com"},
 				{ID: "u2", Email: "b@test.com"},
@@ -230,7 +230,7 @@ func TestRoles_GetAll(t *testing.T) {
 
 	mux.HandleFunc("/settings/v3/users/roles", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, settings.RolesResult{
+		_, _ = w.Write(mustJSON(t, settings.RolesResult{
 			Results: []*settings.PublicPermissionSet{
 				{ID: "r1", Name: "Admin", RequiresBillingWrite: true},
 			},
@@ -255,7 +255,7 @@ func TestTeams_GetAll(t *testing.T) {
 
 	mux.HandleFunc("/settings/v3/users/teams", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, settings.TeamsResult{
+		_, _ = w.Write(mustJSON(t, settings.TeamsResult{
 			Results: []*settings.PublicTeam{
 				{ID: "t1", Name: "Sales", UserIDs: []string{"u1"}, SecondaryUserIDs: []string{}},
 			},

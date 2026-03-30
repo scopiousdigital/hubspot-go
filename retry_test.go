@@ -17,11 +17,11 @@ func TestRetrier_RetriesOn500(t *testing.T) {
 		n := atomic.AddInt32(&attempts, 1)
 		if n <= 2 {
 			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(`{"status":"error","message":"server error"}`))
+			_, _ = w.Write([]byte(`{"status":"error","message":"server error"}`))
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"ok":true}`))
+		_, _ = w.Write([]byte(`{"ok":true}`))
 	})
 
 	var result map[string]any
@@ -44,11 +44,11 @@ func TestRetrier_RetriesOn429(t *testing.T) {
 		n := atomic.AddInt32(&attempts, 1)
 		if n <= 1 {
 			w.WriteHeader(http.StatusTooManyRequests)
-			w.Write([]byte(`{"status":"error","message":"rate limited"}`))
+			_, _ = w.Write([]byte(`{"status":"error","message":"rate limited"}`))
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"ok":true}`))
+		_, _ = w.Write([]byte(`{"ok":true}`))
 	})
 
 	var result map[string]any
@@ -70,7 +70,7 @@ func TestRetrier_GivesUpAfterMaxRetries(t *testing.T) {
 	mux.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		atomic.AddInt32(&attempts, 1)
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`{"status":"error","message":"always fails"}`))
+		_, _ = w.Write([]byte(`{"status":"error","message":"always fails"}`))
 	})
 
 	var result map[string]any
@@ -99,7 +99,7 @@ func TestRetrier_NoRetryOn4xx(t *testing.T) {
 	mux.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		atomic.AddInt32(&attempts, 1)
 		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte(`{"status":"error","message":"bad request"}`))
+		_, _ = w.Write([]byte(`{"status":"error","message":"bad request"}`))
 	})
 
 	var result map[string]any
@@ -119,7 +119,7 @@ func TestRetrier_ContextCancellation(t *testing.T) {
 
 	mux.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(`{"status":"error"}`))
+		_, _ = w.Write([]byte(`{"status":"error"}`))
 	})
 
 	ctx, cancel := context.WithCancel(context.Background())

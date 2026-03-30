@@ -113,7 +113,7 @@ func TestFiles_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, files.File{
+		_, _ = w.Write(mustJSON(t, files.File{
 			ID:        "file-123",
 			Name:      "test.pdf",
 			Extension: "pdf",
@@ -150,7 +150,7 @@ func TestFiles_Search(t *testing.T) {
 			t.Errorf("limit = %q, want 5", limit)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, files.CollectionResponseFile{
+		_, _ = w.Write(mustJSON(t, files.CollectionResponseFile{
 			Results: []files.File{
 				{ID: "1", Name: "report.pdf", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 				{ID: "2", Name: "report.docx", CreatedAt: time.Now(), UpdatedAt: time.Now()},
@@ -197,12 +197,12 @@ func TestFiles_UpdateProperties(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input files.FileUpdateInput
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Name != "renamed.pdf" {
 			t.Errorf("Name = %q", input.Name)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, files.File{
+		_, _ = w.Write(mustJSON(t, files.File{
 			ID:        "file-123",
 			Name:      "renamed.pdf",
 			Access:    files.AccessPublicNotIndexable,
@@ -231,7 +231,7 @@ func TestFiles_CheckImportStatus(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, files.FileActionResponse{
+		_, _ = w.Write(mustJSON(t, files.FileActionResponse{
 			TaskID:      "task-abc",
 			Status:      files.StatusComplete,
 			CompletedAt: time.Now(),
@@ -261,12 +261,12 @@ func TestFiles_ImportFromURL(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input files.ImportFromURLInput
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.URL != "https://example.com/image.png" {
 			t.Errorf("URL = %q", input.URL)
 		}
 		w.WriteHeader(http.StatusAccepted)
-		w.Write(mustJSON(t, files.ImportFromURLTaskLocator{
+		_, _ = w.Write(mustJSON(t, files.ImportFromURLTaskLocator{
 			ID:    "task-xyz",
 			Links: map[string]string{"status": "/files/v3/files/import-from-url/async/tasks/task-xyz/status"},
 		}))
@@ -296,7 +296,7 @@ func TestFiles_GetSignedURL(t *testing.T) {
 			t.Errorf("size = %q, want thumb", size)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, files.SignedURL{
+		_, _ = w.Write(mustJSON(t, files.SignedURL{
 			URL:       "https://cdn.hubspot.com/signed/file-123",
 			Name:      "test.png",
 			Extension: "png",
@@ -327,12 +327,12 @@ func TestFolders_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input files.FolderInput
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Name != "my-folder" {
 			t.Errorf("Name = %q", input.Name)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, files.Folder{
+		_, _ = w.Write(mustJSON(t, files.Folder{
 			ID:        "folder-1",
 			Name:      "my-folder",
 			CreatedAt: time.Now(),
@@ -363,7 +363,7 @@ func TestFolders_Search(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, files.CollectionResponseFolder{
+		_, _ = w.Write(mustJSON(t, files.CollectionResponseFolder{
 			Results: []files.Folder{
 				{ID: "folder-1", Name: "images", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 			},
@@ -388,7 +388,7 @@ func TestFolders_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, files.Folder{
+		_, _ = w.Write(mustJSON(t, files.Folder{
 			ID:        "folder-1",
 			Name:      "images",
 			Path:      "/images",
@@ -419,12 +419,12 @@ func TestFolders_Update(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input files.FolderUpdateInput
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Name != "renamed-folder" {
 			t.Errorf("Name = %q", input.Name)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, files.Folder{
+		_, _ = w.Write(mustJSON(t, files.Folder{
 			ID:        "folder-1",
 			Name:      "renamed-folder",
 			CreatedAt: time.Now(),

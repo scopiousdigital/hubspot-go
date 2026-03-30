@@ -16,7 +16,7 @@ func TestHTTPClient_AuthHeader(t *testing.T) {
 		assertAuth(t, r, "test-token")
 		assertMethod(t, r, http.MethodGet)
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{}`))
+		_, _ = w.Write([]byte(`{}`))
 	})
 
 	var result map[string]any
@@ -49,14 +49,14 @@ func TestHTTPClient_PostBody(t *testing.T) {
 
 		body, _ := io.ReadAll(r.Body)
 		var got map[string]any
-		json.Unmarshal(body, &got)
+		_ = json.Unmarshal(body, &got)
 
 		if got["name"] != "test" {
 			t.Errorf("body name = %v, want %q", got["name"], "test")
 		}
 
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, map[string]string{"id": "123"}))
+		_, _ = w.Write(mustJSON(t, map[string]string{"id": "123"}))
 	})
 
 	var result map[string]string
@@ -75,7 +75,7 @@ func TestHTTPClient_APIError(t *testing.T) {
 
 	mux.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`{
+		_, _ = w.Write([]byte(`{
 			"status": "error",
 			"message": "Object not found",
 			"correlationId": "abc-123",
@@ -116,7 +116,7 @@ func TestHTTPClient_ContentTypeHeaders(t *testing.T) {
 			t.Errorf("Accept = %q, want application/json", accept)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{}`))
+		_, _ = w.Write([]byte(`{}`))
 	})
 
 	var result map[string]any

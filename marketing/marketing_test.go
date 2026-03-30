@@ -118,12 +118,12 @@ func TestForms_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input marketing.FormCreateRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Name != "Test Form" {
 			t.Errorf("name = %q, want 'Test Form'", input.Name)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, marketing.FormDefinition{
+		_, _ = w.Write(mustJSON(t, marketing.FormDefinition{
 			ID:        "form-123",
 			Name:      "Test Form",
 			FormType:  "hubspot",
@@ -156,7 +156,7 @@ func TestForms_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.FormDefinition{
+		_, _ = w.Write(mustJSON(t, marketing.FormDefinition{
 			ID:        "form-123",
 			Name:      "Test Form",
 			FormType:  "hubspot",
@@ -186,7 +186,7 @@ func TestForms_GetPage(t *testing.T) {
 			t.Errorf("limit = %q, want 10", limit)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.FormListResult{
+		_, _ = w.Write(mustJSON(t, marketing.FormListResult{
 			Results: []marketing.FormDefinition{
 				{ID: "f1", Name: "Form 1", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 				{ID: "f2", Name: "Form 2", CreatedAt: time.Now(), UpdatedAt: time.Now()},
@@ -216,7 +216,7 @@ func TestForms_Update(t *testing.T) {
 			t.Errorf("method = %s, want PATCH", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.FormDefinition{
+		_, _ = w.Write(mustJSON(t, marketing.FormDefinition{
 			ID:        "form-123",
 			Name:      "Updated Form",
 			CreatedAt: time.Now(),
@@ -264,12 +264,12 @@ func TestEmails_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input marketing.EmailCreateRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Name != "Test Email" {
 			t.Errorf("name = %q", input.Name)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, marketing.PublicEmail{
+		_, _ = w.Write(mustJSON(t, marketing.PublicEmail{
 			ID:   "email-001",
 			Name: "Test Email",
 		}))
@@ -295,7 +295,7 @@ func TestEmails_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.PublicEmail{
+		_, _ = w.Write(mustJSON(t, marketing.PublicEmail{
 			ID:      "email-001",
 			Name:    "Test Email",
 			Subject: "Hello",
@@ -323,7 +323,7 @@ func TestEmails_GetPage(t *testing.T) {
 			t.Errorf("limit = %q, want 5", limit)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.EmailListResult{
+		_, _ = w.Write(mustJSON(t, marketing.EmailListResult{
 			Total: 2,
 			Results: []marketing.PublicEmail{
 				{ID: "e1", Name: "Email 1"},
@@ -353,7 +353,7 @@ func TestEmails_Update(t *testing.T) {
 			t.Errorf("method = %s, want PATCH", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.PublicEmail{
+		_, _ = w.Write(mustJSON(t, marketing.PublicEmail{
 			ID:      "email-001",
 			Name:    "Updated Email",
 			Subject: "Updated Subject",
@@ -398,7 +398,7 @@ func TestEmails_Clone(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, marketing.PublicEmail{
+		_, _ = w.Write(mustJSON(t, marketing.PublicEmail{
 			ID:         "email-002",
 			Name:       "Cloned Email",
 			ClonedFrom: "email-001",
@@ -445,7 +445,7 @@ func TestStatistics_GetEmailsList(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.AggregateEmailStatistics{
+		_, _ = w.Write(mustJSON(t, marketing.AggregateEmailStatistics{
 			Emails: []int{1, 2, 3},
 			Aggregate: &marketing.EmailStatisticsData{
 				Counters: map[string]int{"sent": 100, "delivered": 95},
@@ -477,7 +477,7 @@ func TestStatistics_GetHistogram(t *testing.T) {
 			t.Errorf("interval = %q, want DAY", interval)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.EmailStatisticsHistogramResult{
+		_, _ = w.Write(mustJSON(t, marketing.EmailStatisticsHistogramResult{
 			Total: 1,
 			Results: []marketing.EmailStatisticInterval{
 				{Aggregations: &marketing.EmailStatisticsData{
@@ -510,12 +510,12 @@ func TestEvents_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input marketing.MarketingEventCreateRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.EventName != "My Event" {
 			t.Errorf("eventName = %q", input.EventName)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, marketing.MarketingEventDefaultResponse{
+		_, _ = w.Write(mustJSON(t, marketing.MarketingEventDefaultResponse{
 			EventName:      "My Event",
 			EventOrganizer: "Test Org",
 		}))
@@ -544,7 +544,7 @@ func TestEvents_GetAll(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.MarketingEventListResult{
+		_, _ = w.Write(mustJSON(t, marketing.MarketingEventListResult{
 			Results: []marketing.MarketingEventReadResponseV2{
 				{ObjectID: "obj-1", EventName: "Event 1", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 			},
@@ -586,7 +586,7 @@ func TestEvents_Cancel(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.MarketingEventDefaultResponse{
+		_, _ = w.Write(mustJSON(t, marketing.MarketingEventDefaultResponse{
 			EventName:      "Cancelled Event",
 			EventOrganizer: "Test Org",
 		}))
@@ -610,7 +610,7 @@ func TestEvents_GetSettings(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.EventDetailSettings{
+		_, _ = w.Write(mustJSON(t, marketing.EventDetailSettings{
 			AppID:           12345,
 			EventDetailsURL: "https://example.com/event",
 		}))
@@ -637,7 +637,7 @@ func TestEvents_GetParticipationsCounters(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.AttendanceCounters{
+		_, _ = w.Write(mustJSON(t, marketing.AttendanceCounters{
 			Attended:   50,
 			Registered: 100,
 			Cancelled:  10,
@@ -669,7 +669,7 @@ func TestTransactional_SendEmail(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input marketing.SingleSendRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.EmailID != 12345 {
 			t.Errorf("emailId = %d", input.EmailID)
 		}
@@ -677,7 +677,7 @@ func TestTransactional_SendEmail(t *testing.T) {
 			t.Errorf("to = %q", input.Message.To)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.EmailSendStatusView{
+		_, _ = w.Write(mustJSON(t, marketing.EmailSendStatusView{
 			StatusID: "status-001",
 			Status:   "PENDING",
 		}))
@@ -708,12 +708,12 @@ func TestTransactional_CreateToken(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input marketing.SmtpApiTokenCreateRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.CampaignName != "My Campaign" {
 			t.Errorf("campaignName = %q", input.CampaignName)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, marketing.SmtpApiTokenView{
+		_, _ = w.Write(mustJSON(t, marketing.SmtpApiTokenView{
 			ID:              "token-001",
 			CampaignName:    "My Campaign",
 			EmailCampaignID: "ec-001",
@@ -748,7 +748,7 @@ func TestTransactional_GetTokenByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.SmtpApiTokenView{
+		_, _ = w.Write(mustJSON(t, marketing.SmtpApiTokenView{
 			ID:              "token-001",
 			CampaignName:    "My Campaign",
 			EmailCampaignID: "ec-001",
@@ -778,7 +778,7 @@ func TestTransactional_GetTokensPage(t *testing.T) {
 			t.Errorf("limit = %q, want 10", limit)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.SmtpTokenListResult{
+		_, _ = w.Write(mustJSON(t, marketing.SmtpTokenListResult{
 			Results: []marketing.SmtpApiTokenView{
 				{ID: "t1", CampaignName: "C1", CreatedAt: time.Now()},
 				{ID: "t2", CampaignName: "C2", CreatedAt: time.Now()},
@@ -821,7 +821,7 @@ func TestTransactional_ResetPassword(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, marketing.SmtpApiTokenView{
+		_, _ = w.Write(mustJSON(t, marketing.SmtpApiTokenView{
 			ID:       "token-001",
 			Password: "new-password",
 		}))

@@ -110,7 +110,7 @@ func TestDefinitions_GetAll(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, communicationpreferences.SubscriptionDefinitionsResponse{
+		_, _ = w.Write(mustJSON(t, communicationpreferences.SubscriptionDefinitionsResponse{
 			SubscriptionDefinitions: []*communicationpreferences.SubscriptionDefinition{
 				{
 					ID:          "sub1",
@@ -147,7 +147,7 @@ func TestStatus_GetEmailStatus(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, communicationpreferences.PublicSubscriptionStatusesResponse{
+		_, _ = w.Write(mustJSON(t, communicationpreferences.PublicSubscriptionStatusesResponse{
 			Recipient: "test@example.com",
 			SubscriptionStatuses: []*communicationpreferences.PublicSubscriptionStatus{
 				{
@@ -186,7 +186,7 @@ func TestStatus_Subscribe(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input communicationpreferences.PublicUpdateSubscriptionStatusRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.EmailAddress != "test@example.com" {
 			t.Errorf("emailAddress = %q", input.EmailAddress)
 		}
@@ -194,7 +194,7 @@ func TestStatus_Subscribe(t *testing.T) {
 			t.Errorf("subscriptionId = %q", input.SubscriptionID)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, communicationpreferences.PublicSubscriptionStatus{
+		_, _ = w.Write(mustJSON(t, communicationpreferences.PublicSubscriptionStatus{
 			ID:     "sub1",
 			Name:   "Marketing",
 			Status: communicationpreferences.StatusSubscribed,
@@ -223,7 +223,7 @@ func TestStatus_Unsubscribe(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, communicationpreferences.PublicSubscriptionStatus{
+		_, _ = w.Write(mustJSON(t, communicationpreferences.PublicSubscriptionStatus{
 			ID:     "sub1",
 			Name:   "Marketing",
 			Status: communicationpreferences.StatusNotSubscribed,

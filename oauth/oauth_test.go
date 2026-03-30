@@ -112,7 +112,7 @@ func TestAccessTokens_Get(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, oauth.AccessTokenInfo{
+		_, _ = w.Write(mustJSON(t, oauth.AccessTokenInfo{
 			HubID:     12345,
 			UserID:    67890,
 			Scopes:    []string{"contacts", "content"},
@@ -147,7 +147,7 @@ func TestRefreshTokens_Get(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, oauth.RefreshTokenInfo{
+		_, _ = w.Write(mustJSON(t, oauth.RefreshTokenInfo{
 			HubID:    12345,
 			UserID:   67890,
 			Scopes:   []string{"contacts"},
@@ -195,7 +195,7 @@ func TestTokens_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input oauth.TokenCreateRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.GrantType != "authorization_code" {
 			t.Errorf("grant_type = %q, want authorization_code", input.GrantType)
 		}
@@ -203,7 +203,7 @@ func TestTokens_Create(t *testing.T) {
 			t.Errorf("client_id = %q, want my-client-id", input.ClientID)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, oauth.TokenResponse{
+		_, _ = w.Write(mustJSON(t, oauth.TokenResponse{
 			AccessToken:  "new-access-token",
 			RefreshToken: "new-refresh-token",
 			TokenType:    "bearer",

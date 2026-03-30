@@ -24,7 +24,7 @@ func TestOwners_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.PublicOwner{
+		_, _ = w.Write(mustJSON(t, crm.PublicOwner{
 			ID:        "12345",
 			Email:     "owner@test.com",
 			FirstName: "Jane",
@@ -59,7 +59,7 @@ func TestOwners_List(t *testing.T) {
 			t.Errorf("email = %q", email)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.OwnerListResult{
+		_, _ = w.Write(mustJSON(t, crm.OwnerListResult{
 			Results: []*crm.PublicOwner{
 				{ID: "1", Email: "owner@test.com", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 			},
@@ -89,12 +89,12 @@ func TestProperties_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input crm.PropertyCreate
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Name != "custom_prop" {
 			t.Errorf("name = %q", input.Name)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.Property{
+		_, _ = w.Write(mustJSON(t, crm.Property{
 			Name:      "custom_prop",
 			Label:     "Custom Property",
 			Type:      "string",
@@ -127,7 +127,7 @@ func TestProperties_GetAll(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.PropertyListResult{
+		_, _ = w.Write(mustJSON(t, crm.PropertyListResult{
 			Results: []*crm.Property{
 				{Name: "email", Label: "Email", Type: "string", FieldType: "text"},
 				{Name: "firstname", Label: "First Name", Type: "string", FieldType: "text"},
@@ -153,7 +153,7 @@ func TestProperties_GetByName(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.Property{
+		_, _ = w.Write(mustJSON(t, crm.Property{
 			Name: "email", Label: "Email", Type: "string", FieldType: "text",
 		}))
 	})
@@ -176,7 +176,7 @@ func TestProperties_Update(t *testing.T) {
 			t.Errorf("method = %s, want PATCH", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.Property{
+		_, _ = w.Write(mustJSON(t, crm.Property{
 			Name: "custom_prop", Label: "Updated Label", Type: "string", FieldType: "text",
 		}))
 	})
@@ -218,7 +218,7 @@ func TestProperties_CreateGroup(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.PropertyGroup{
+		_, _ = w.Write(mustJSON(t, crm.PropertyGroup{
 			Name:  "my_group",
 			Label: "My Group",
 		}))
@@ -245,7 +245,7 @@ func TestProperties_GetAllGroups(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.PropertyGroupListResult{
+		_, _ = w.Write(mustJSON(t, crm.PropertyGroupListResult{
 			Results: []*crm.PropertyGroup{
 				{Name: "contactinformation", Label: "Contact Information"},
 			},
@@ -274,7 +274,7 @@ func TestPipelines_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.Pipeline{
+		_, _ = w.Write(mustJSON(t, crm.Pipeline{
 			ID:    "p1",
 			Label: "Sales Pipeline",
 			Stages: []crm.PipelineStage{
@@ -309,7 +309,7 @@ func TestPipelines_GetAll(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.PipelineListResult{
+		_, _ = w.Write(mustJSON(t, crm.PipelineListResult{
 			Results: []*crm.Pipeline{
 				{ID: "p1", Label: "Sales", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 			},
@@ -334,7 +334,7 @@ func TestPipelines_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.Pipeline{
+		_, _ = w.Write(mustJSON(t, crm.Pipeline{
 			ID: "p1", Label: "Sales", CreatedAt: time.Now(), UpdatedAt: time.Now(),
 		}))
 	})
@@ -357,7 +357,7 @@ func TestPipelines_Update(t *testing.T) {
 			t.Errorf("method = %s, want PATCH", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.Pipeline{
+		_, _ = w.Write(mustJSON(t, crm.Pipeline{
 			ID: "p1", Label: "Updated Pipeline", CreatedAt: time.Now(), UpdatedAt: time.Now(),
 		}))
 	})
@@ -382,7 +382,7 @@ func TestPipelines_Replace(t *testing.T) {
 			t.Errorf("method = %s, want PUT", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.Pipeline{
+		_, _ = w.Write(mustJSON(t, crm.Pipeline{
 			ID: "p1", Label: "Replaced Pipeline", CreatedAt: time.Now(), UpdatedAt: time.Now(),
 		}))
 	})
@@ -426,7 +426,7 @@ func TestPipelines_CreateStage(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.PipelineStage{
+		_, _ = w.Write(mustJSON(t, crm.PipelineStage{
 			ID: "s1", Label: "New Stage", CreatedAt: time.Now(), UpdatedAt: time.Now(),
 		}))
 	})
@@ -472,7 +472,7 @@ func TestSchemas_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.ObjectSchema{
+		_, _ = w.Write(mustJSON(t, crm.ObjectSchema{
 			ID:   "schema1",
 			Name: "cars",
 			Labels: crm.ObjectTypeDefinitionLabels{
@@ -509,7 +509,7 @@ func TestSchemas_GetAll(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ObjectSchemaListResult{
+		_, _ = w.Write(mustJSON(t, crm.ObjectSchemaListResult{
 			Results: []*crm.ObjectSchema{
 				{ID: "1", Name: "cars", Labels: crm.ObjectTypeDefinitionLabels{Singular: "Car", Plural: "Cars"}},
 			},
@@ -534,7 +534,7 @@ func TestSchemas_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ObjectSchema{
+		_, _ = w.Write(mustJSON(t, crm.ObjectSchema{
 			ID: "1", Name: "cars", Labels: crm.ObjectTypeDefinitionLabels{Singular: "Car"},
 		}))
 	})
@@ -557,7 +557,7 @@ func TestSchemas_Update(t *testing.T) {
 			t.Errorf("method = %s, want PATCH", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ObjectTypeDefinition{
+		_, _ = w.Write(mustJSON(t, crm.ObjectTypeDefinition{
 			ID: "1", Name: "cars",
 			Labels:             crm.ObjectTypeDefinitionLabels{Singular: "Vehicle"},
 			RequiredProperties: []string{"make"},
@@ -601,7 +601,7 @@ func TestSchemas_CreateAssociation(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.SchemaAssociationDefinition{
+		_, _ = w.Write(mustJSON(t, crm.SchemaAssociationDefinition{
 			ID:               "assoc1",
 			FromObjectTypeID: "cars",
 			ToObjectTypeID:   "contacts",
@@ -633,7 +633,7 @@ func TestAssociations_BatchCreate(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.BatchPublicAssociationResult{
+		_, _ = w.Write(mustJSON(t, crm.BatchPublicAssociationResult{
 			Status:      "COMPLETE",
 			StartedAt:   time.Now(),
 			CompletedAt: time.Now(),
@@ -662,7 +662,7 @@ func TestAssociations_BatchRead(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.BatchPublicAssociationMultiResult{
+		_, _ = w.Write(mustJSON(t, crm.BatchPublicAssociationMultiResult{
 			Status:      "COMPLETE",
 			StartedAt:   time.Now(),
 			CompletedAt: time.Now(),
@@ -689,7 +689,7 @@ func TestAssociations_V4Create(t *testing.T) {
 			t.Errorf("method = %s, want PUT", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.LabelsBetweenObjectPair{
+		_, _ = w.Write(mustJSON(t, crm.LabelsBetweenObjectPair{
 			FromObjectTypeID: "contacts",
 			FromObjectID:     100,
 			ToObjectTypeID:   "companies",
@@ -717,7 +717,7 @@ func TestAssociations_V4GetPage(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.CollectionMultiAssociatedObjectWithLabel{
+		_, _ = w.Write(mustJSON(t, crm.CollectionMultiAssociatedObjectWithLabel{
 			Results: []*crm.MultiAssociatedObjectWithLabel{
 				{ToObjectID: 200},
 			},
@@ -742,7 +742,7 @@ func TestAssociations_V4GetDefinitions(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.AssociationDefinitionSpecWithLabelResult{
+		_, _ = w.Write(mustJSON(t, crm.AssociationDefinitionSpecWithLabelResult{
 			Results: []*crm.AssociationV4SpecWithLabel{
 				{Category: "HUBSPOT_DEFINED", TypeID: 1, Label: "Primary"},
 			},
@@ -771,7 +771,7 @@ func TestImports_List(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ImportListResult{
+		_, _ = w.Write(mustJSON(t, crm.ImportListResult{
 			Results: []*crm.PublicImportResponse{
 				{ID: "imp1", State: "DONE", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 			},
@@ -796,7 +796,7 @@ func TestImports_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.PublicImportResponse{
+		_, _ = w.Write(mustJSON(t, crm.PublicImportResponse{
 			ID: "imp1", State: "DONE", CreatedAt: time.Now(), UpdatedAt: time.Now(),
 		}))
 	})
@@ -819,7 +819,7 @@ func TestImports_Cancel(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ActionResponse{
+		_, _ = w.Write(mustJSON(t, crm.ActionResponse{
 			Status:      "COMPLETE",
 			StartedAt:   time.Now(),
 			CompletedAt: time.Now(),
@@ -844,7 +844,7 @@ func TestImports_GetErrors(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ImportErrorListResult{
+		_, _ = w.Write(mustJSON(t, crm.ImportErrorListResult{
 			Results: []*crm.PublicImportError{
 				{ErrorType: "INVALID_EMAIL"},
 			},
@@ -873,7 +873,7 @@ func TestExports_Start(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusAccepted)
-		w.Write(mustJSON(t, crm.TaskLocator{ID: "task1"}))
+		_, _ = w.Write(mustJSON(t, crm.TaskLocator{ID: "task1"}))
 	})
 
 	result, err := svc.Exports.Start(context.Background(), &crm.ExportRequest{
@@ -901,7 +901,7 @@ func TestExports_GetStatus(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ExportStatusResponse{
+		_, _ = w.Write(mustJSON(t, crm.ExportStatusResponse{
 			Status:      "COMPLETE",
 			Result:      "https://download.url/file.csv",
 			StartedAt:   time.Now(),
@@ -931,7 +931,7 @@ func TestLists_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ListCreateResponse{
+		_, _ = w.Write(mustJSON(t, crm.ListCreateResponse{
 			ListID:         "lst1",
 			Name:           "Test List",
 			ObjectTypeID:   "0-1",
@@ -961,7 +961,7 @@ func TestLists_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ListFetchResponse{
+		_, _ = w.Write(mustJSON(t, crm.ListFetchResponse{
 			List: &crm.HubSpotList{ListID: "lst1", Name: "Test List"},
 		}))
 	})
@@ -984,7 +984,7 @@ func TestLists_Search(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ListSearchResponse{
+		_, _ = w.Write(mustJSON(t, crm.ListSearchResponse{
 			Lists: []*crm.HubSpotList{
 				{ListID: "lst1", Name: "Test List"},
 			},
@@ -1029,7 +1029,7 @@ func TestLists_AddMembers(t *testing.T) {
 			t.Errorf("method = %s, want PUT", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.MembershipsUpdateResponse{
+		_, _ = w.Write(mustJSON(t, crm.MembershipsUpdateResponse{
 			RecordIdsAdded: []string{"100", "200"},
 		}))
 	})
@@ -1069,7 +1069,7 @@ func TestLists_CreateFolder(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ListFolderCreateResponse{
+		_, _ = w.Write(mustJSON(t, crm.ListFolderCreateResponse{
 			Folder: &crm.ListFolder{ID: "f1", Name: "My Folder"},
 		}))
 	})
@@ -1098,7 +1098,7 @@ func TestTimeline_CreateEvent(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.TimelineEventResponse{
+		_, _ = w.Write(mustJSON(t, crm.TimelineEventResponse{
 			ID:              "evt1",
 			EventTemplateID: "tmpl1",
 			ObjectType:      "contacts",
@@ -1128,7 +1128,7 @@ func TestTimeline_GetEventByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.TimelineEventResponse{
+		_, _ = w.Write(mustJSON(t, crm.TimelineEventResponse{
 			ID: "evt1", EventTemplateID: "tmpl1", ObjectType: "contacts",
 			Tokens: map[string]string{},
 		}))
@@ -1152,7 +1152,7 @@ func TestTimeline_CreateTemplate(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.TimelineEventTemplate{
+		_, _ = w.Write(mustJSON(t, crm.TimelineEventTemplate{
 			ID:         "tmpl1",
 			Name:       "Test Template",
 			ObjectType: "contacts",
@@ -1186,7 +1186,7 @@ func TestTimeline_GetAllTemplates(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.TimelineEventTemplateListResult{
+		_, _ = w.Write(mustJSON(t, crm.TimelineEventTemplateListResult{
 			Results: []*crm.TimelineEventTemplate{
 				{ID: "tmpl1", Name: "Template 1", ObjectType: "contacts"},
 			},
@@ -1228,7 +1228,7 @@ func TestTimeline_CreateToken(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.TimelineEventTemplateToken{
+		_, _ = w.Write(mustJSON(t, crm.TimelineEventTemplateToken{
 			Name:  "new_token",
 			Label: "New Token",
 			Type:  "string",
@@ -1261,7 +1261,7 @@ func TestExtensions_CreateCallingSettings(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.CallingSettingsResponse{
+		_, _ = w.Write(mustJSON(t, crm.CallingSettingsResponse{
 			Name:      "My App",
 			URL:       "https://myapp.com/calling",
 			IsReady:   true,
@@ -1291,7 +1291,7 @@ func TestExtensions_GetCallingSettings(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.CallingSettingsResponse{
+		_, _ = w.Write(mustJSON(t, crm.CallingSettingsResponse{
 			Name: "My App", URL: "https://myapp.com/calling",
 			CreatedAt: time.Now(), UpdatedAt: time.Now(),
 		}))
@@ -1332,7 +1332,7 @@ func TestExtensions_CreateCard(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.PublicCardResponse{
+		_, _ = w.Write(mustJSON(t, crm.PublicCardResponse{
 			ID:        "card1",
 			Title:     "Test Card",
 			CreatedAt: time.Now(),
@@ -1364,7 +1364,7 @@ func TestExtensions_GetAllCards(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.PublicCardListResponse{
+		_, _ = w.Write(mustJSON(t, crm.PublicCardListResponse{
 			Results: []*crm.PublicCardResponse{
 				{ID: "card1", Title: "Test Card", CreatedAt: time.Now(), UpdatedAt: time.Now()},
 			},
@@ -1389,7 +1389,7 @@ func TestExtensions_ReplaceVideoConferencingSettings(t *testing.T) {
 			t.Errorf("method = %s, want PUT", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.VideoConferencingExternalSettings{
+		_, _ = w.Write(mustJSON(t, crm.VideoConferencingExternalSettings{
 			CreateMeetingURL: "https://example.com/create",
 		}))
 	})
@@ -1418,7 +1418,7 @@ func TestCommerce_Invoices_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.SimplePublicObject{
+		_, _ = w.Write(mustJSON(t, crm.SimplePublicObject{
 			ID:         "inv1",
 			Properties: crm.Properties{"hs_invoice_number": "INV-001"},
 			CreatedAt:  time.Now(),
@@ -1446,7 +1446,7 @@ func TestCommerce_Invoices_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.SimplePublicObjectWithAssociations{
+		_, _ = w.Write(mustJSON(t, crm.SimplePublicObjectWithAssociations{
 			ID: "inv1", Properties: crm.Properties{}, CreatedAt: time.Now(), UpdatedAt: time.Now(),
 		}))
 	})
@@ -1469,7 +1469,7 @@ func TestCommerce_Invoices_Search(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.SearchResult{
+		_, _ = w.Write(mustJSON(t, crm.SearchResult{
 			Total:   1,
 			Results: []*crm.SimplePublicObject{{ID: "inv1", Properties: crm.Properties{}, CreatedAt: time.Now(), UpdatedAt: time.Now()}},
 		}))

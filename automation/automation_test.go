@@ -110,7 +110,7 @@ func TestCallbacks_Complete(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input automation.CallbackCompletionRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.OutputFields["hs_status"] != "SUCCESS" {
 			t.Errorf("hs_status = %q", input.OutputFields["hs_status"])
 		}
@@ -135,7 +135,7 @@ func TestCallbacks_CompleteBatch(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input automation.BatchInputCallbackCompletionBatchRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if len(input.Inputs) != 2 {
 			t.Errorf("inputs = %d, want 2", len(input.Inputs))
 		}
@@ -162,7 +162,7 @@ func TestDefinitions_Create(t *testing.T) {
 			t.Errorf("method = %s, want POST", r.Method)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, automation.PublicActionDefinition{
+		_, _ = w.Write(mustJSON(t, automation.PublicActionDefinition{
 			ID:        "def1",
 			ActionURL: "https://example.com/action",
 			Published: true,
@@ -192,7 +192,7 @@ func TestDefinitions_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, automation.PublicActionDefinition{
+		_, _ = w.Write(mustJSON(t, automation.PublicActionDefinition{
 			ID:        "def1",
 			ActionURL: "https://example.com/action",
 		}))
@@ -216,7 +216,7 @@ func TestDefinitions_List(t *testing.T) {
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, automation.DefinitionsListResult{
+		_, _ = w.Write(mustJSON(t, automation.DefinitionsListResult{
 			Results: []*automation.PublicActionDefinition{
 				{ID: "def1"},
 				{ID: "def2"},
@@ -256,7 +256,7 @@ func TestFunctions_List(t *testing.T) {
 
 	mux.HandleFunc("/automation/v4/actions/12345/def1/functions", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, automation.FunctionsResult{
+		_, _ = w.Write(mustJSON(t, automation.FunctionsResult{
 			Results: []*automation.PublicActionFunctionIdentifier{
 				{FunctionType: "PRE_ACTION_EXECUTION", ID: "fn1"},
 			},
@@ -281,7 +281,7 @@ func TestRevisions_GetByID(t *testing.T) {
 
 	mux.HandleFunc("/automation/v4/actions/12345/def1/revisions/rev1", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, automation.PublicActionRevision{
+		_, _ = w.Write(mustJSON(t, automation.PublicActionRevision{
 			ID:         "rev1",
 			RevisionID: "rev1",
 		}))

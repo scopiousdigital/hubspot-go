@@ -114,12 +114,12 @@ func TestContacts_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input crm.SimplePublicObjectInputForCreate
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Properties["email"] != "test@example.com" {
 			t.Errorf("email = %q", input.Properties["email"])
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.SimplePublicObject{
+		_, _ = w.Write(mustJSON(t, crm.SimplePublicObject{
 			ID:         "501",
 			Properties: crm.Properties{"email": "test@example.com"},
 			CreatedAt:  time.Now(),
@@ -150,7 +150,7 @@ func TestContacts_GetByID(t *testing.T) {
 			t.Errorf("properties = %q", props)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.SimplePublicObjectWithAssociations{
+		_, _ = w.Write(mustJSON(t, crm.SimplePublicObjectWithAssociations{
 			ID:         "501",
 			Properties: crm.Properties{"email": "test@example.com"},
 			CreatedAt:  time.Now(),
@@ -178,7 +178,7 @@ func TestContacts_Update(t *testing.T) {
 			t.Errorf("method = %s, want PATCH", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.SimplePublicObject{
+		_, _ = w.Write(mustJSON(t, crm.SimplePublicObject{
 			ID:         "501",
 			Properties: crm.Properties{"firstname": "Updated"},
 			CreatedAt:  time.Now(),
@@ -226,7 +226,7 @@ func TestContacts_List(t *testing.T) {
 			t.Errorf("limit = %q, want 10", limit)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.ListResult{
+		_, _ = w.Write(mustJSON(t, crm.ListResult{
 			Results: []*crm.SimplePublicObjectWithAssociations{
 				{ID: "1", Properties: crm.Properties{"email": "a@test.com"}, CreatedAt: time.Now(), UpdatedAt: time.Now()},
 				{ID: "2", Properties: crm.Properties{"email": "b@test.com"}, CreatedAt: time.Now(), UpdatedAt: time.Now()},
@@ -257,12 +257,12 @@ func TestContacts_Search(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var req crm.PublicObjectSearchRequest
-		json.Unmarshal(body, &req)
+		_ = json.Unmarshal(body, &req)
 		if req.FilterGroups[0].Filters[0].Operator != crm.FilterOperatorEQ {
 			t.Errorf("operator = %q", req.FilterGroups[0].Filters[0].Operator)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.SearchResult{
+		_, _ = w.Write(mustJSON(t, crm.SearchResult{
 			Total:   1,
 			Results: []*crm.SimplePublicObject{{ID: "501", Properties: crm.Properties{}, CreatedAt: time.Now(), UpdatedAt: time.Now()}},
 		}))
@@ -288,12 +288,12 @@ func TestContacts_BatchCreate(t *testing.T) {
 	mux.HandleFunc("/crm/v3/objects/contacts/batch/create", func(w http.ResponseWriter, r *http.Request) {
 		body, _ := io.ReadAll(r.Body)
 		var input crm.BatchCreateInput
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if len(input.Inputs) != 2 {
 			t.Errorf("inputs = %d, want 2", len(input.Inputs))
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, crm.BatchResult{
+		_, _ = w.Write(mustJSON(t, crm.BatchResult{
 			Status: "COMPLETE",
 			Results: []*crm.SimplePublicObject{
 				{ID: "1", Properties: crm.Properties{}, CreatedAt: time.Now(), UpdatedAt: time.Now()},
@@ -342,7 +342,7 @@ func TestContacts_Merge(t *testing.T) {
 
 	mux.HandleFunc("/crm/v3/objects/contacts/merge", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, crm.SimplePublicObject{
+		_, _ = w.Write(mustJSON(t, crm.SimplePublicObject{
 			ID: "501", Properties: crm.Properties{}, CreatedAt: time.Now(), UpdatedAt: time.Now(),
 		}))
 	})
@@ -403,7 +403,7 @@ func TestContacts_GetAll(t *testing.T) {
 			}
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, result))
+		_, _ = w.Write(mustJSON(t, result))
 	})
 
 	all, err := svc.Contacts.GetAll(context.Background(), nil)
@@ -425,7 +425,7 @@ func TestDifferentObjectTypes(t *testing.T) {
 	for _, objType := range []string{"contacts", "companies", "deals", "tickets"} {
 		mux.HandleFunc("/crm/v3/objects/"+objType+"/123", func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
-			w.Write(mustJSON(t, crm.SimplePublicObjectWithAssociations{
+			_, _ = w.Write(mustJSON(t, crm.SimplePublicObjectWithAssociations{
 				ID: "123", Properties: crm.Properties{}, CreatedAt: time.Now(), UpdatedAt: time.Now(),
 			}))
 		})

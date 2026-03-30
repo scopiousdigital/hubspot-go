@@ -113,7 +113,7 @@ func TestSettings_GetAll(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, webhooks.SettingsResponse{
+		_, _ = w.Write(mustJSON(t, webhooks.SettingsResponse{
 			CreatedAt: time.Now(),
 			TargetURL: "https://example.com/webhook",
 			Throttling: webhooks.ThrottlingSettings{
@@ -144,12 +144,12 @@ func TestSettings_Configure(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input webhooks.SettingsChangeRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.TargetURL != "https://example.com/new-webhook" {
 			t.Errorf("TargetURL = %q", input.TargetURL)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, webhooks.SettingsResponse{
+		_, _ = w.Write(mustJSON(t, webhooks.SettingsResponse{
 			CreatedAt:  time.Now(),
 			TargetURL:  input.TargetURL,
 			Throttling: input.Throttling,
@@ -196,7 +196,7 @@ func TestSubscriptions_GetAll(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, webhooks.SubscriptionListResponse{
+		_, _ = w.Write(mustJSON(t, webhooks.SubscriptionListResponse{
 			Results: []webhooks.SubscriptionResponse{
 				{ID: "1", EventType: webhooks.EventTypeContactCreation, Active: true, CreatedAt: time.Now()},
 				{ID: "2", EventType: webhooks.EventTypeDealCreation, Active: false, CreatedAt: time.Now()},
@@ -226,12 +226,12 @@ func TestSubscriptions_Create(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input webhooks.SubscriptionCreateRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.EventType != webhooks.EventTypeContactCreation {
 			t.Errorf("EventType = %q", input.EventType)
 		}
 		w.WriteHeader(http.StatusCreated)
-		w.Write(mustJSON(t, webhooks.SubscriptionResponse{
+		_, _ = w.Write(mustJSON(t, webhooks.SubscriptionResponse{
 			ID:        "100",
 			EventType: input.EventType,
 			Active:    true,
@@ -259,7 +259,7 @@ func TestSubscriptions_GetByID(t *testing.T) {
 			t.Errorf("method = %s, want GET", r.Method)
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, webhooks.SubscriptionResponse{
+		_, _ = w.Write(mustJSON(t, webhooks.SubscriptionResponse{
 			ID:        "100",
 			EventType: webhooks.EventTypeContactCreation,
 			Active:    true,
@@ -286,12 +286,12 @@ func TestSubscriptions_Update(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input webhooks.SubscriptionPatchRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if input.Active == nil || *input.Active != false {
 			t.Errorf("Active should be false")
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, webhooks.SubscriptionResponse{
+		_, _ = w.Write(mustJSON(t, webhooks.SubscriptionResponse{
 			ID:        "100",
 			EventType: webhooks.EventTypeContactCreation,
 			Active:    false,
@@ -338,12 +338,12 @@ func TestSubscriptions_BatchUpdate(t *testing.T) {
 		}
 		body, _ := io.ReadAll(r.Body)
 		var input webhooks.BatchInputSubscriptionBatchUpdateRequest
-		json.Unmarshal(body, &input)
+		_ = json.Unmarshal(body, &input)
 		if len(input.Inputs) != 2 {
 			t.Errorf("inputs = %d, want 2", len(input.Inputs))
 		}
 		w.WriteHeader(http.StatusOK)
-		w.Write(mustJSON(t, webhooks.BatchResponseSubscriptionResponse{
+		_, _ = w.Write(mustJSON(t, webhooks.BatchResponseSubscriptionResponse{
 			Status:      "COMPLETE",
 			CompletedAt: time.Now(),
 			StartedAt:   time.Now(),
