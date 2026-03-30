@@ -47,4 +47,3 @@ type TokenCreateRequest struct {
 	ClientSecret string `json:"client_secret"`
 	RefreshToken string `json:"refresh_token,omitempty"`
 }
-

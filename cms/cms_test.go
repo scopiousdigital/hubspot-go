@@ -1007,58 +1007,29 @@ func TestNewService_AllFieldsInitialized(t *testing.T) {
 	svc, _, teardown := setupCMS(t)
 	defer teardown()
 
-	if svc.BlogPosts == nil {
-		t.Error("BlogPosts is nil")
+	fields := map[string]any{
+		"BlogPosts":            svc.BlogPosts,
+		"BlogAuthors":          svc.BlogAuthors,
+		"BlogTags":             svc.BlogTags,
+		"Tables":               svc.Tables,
+		"Rows":                 svc.Rows,
+		"RowsBatch":            svc.RowsBatch,
+		"Domains":              svc.Domains,
+		"LandingPages":         svc.LandingPages,
+		"SitePages":            svc.SitePages,
+		"AuditLogs":            svc.AuditLogs,
+		"UrlRedirects":         svc.UrlRedirects,
+		"SourceCode":           svc.SourceCode,
+		"SourceCode.Content":   svc.SourceCode.Content,
+		"SourceCode.Extract":   svc.SourceCode.Extract,
+		"SourceCode.Metadata":  svc.SourceCode.Metadata,
+		"SourceCode.Validation": svc.SourceCode.Validation,
+		"SiteSearch":           svc.SiteSearch,
+		"Performance":          svc.Performance,
 	}
-	if svc.BlogAuthors == nil {
-		t.Error("BlogAuthors is nil")
-	}
-	if svc.BlogTags == nil {
-		t.Error("BlogTags is nil")
-	}
-	if svc.Tables == nil {
-		t.Error("Tables is nil")
-	}
-	if svc.Rows == nil {
-		t.Error("Rows is nil")
-	}
-	if svc.RowsBatch == nil {
-		t.Error("RowsBatch is nil")
-	}
-	if svc.Domains == nil {
-		t.Error("Domains is nil")
-	}
-	if svc.LandingPages == nil {
-		t.Error("LandingPages is nil")
-	}
-	if svc.SitePages == nil {
-		t.Error("SitePages is nil")
-	}
-	if svc.AuditLogs == nil {
-		t.Error("AuditLogs is nil")
-	}
-	if svc.UrlRedirects == nil {
-		t.Error("UrlRedirects is nil")
-	}
-	if svc.SourceCode == nil {
-		t.Error("SourceCode is nil")
-	}
-	if svc.SourceCode.Content == nil {
-		t.Error("SourceCode.Content is nil")
-	}
-	if svc.SourceCode.Extract == nil {
-		t.Error("SourceCode.Extract is nil")
-	}
-	if svc.SourceCode.Metadata == nil {
-		t.Error("SourceCode.Metadata is nil")
-	}
-	if svc.SourceCode.Validation == nil {
-		t.Error("SourceCode.Validation is nil")
-	}
-	if svc.SiteSearch == nil {
-		t.Error("SiteSearch is nil")
-	}
-	if svc.Performance == nil {
-		t.Error("Performance is nil")
+	for name, field := range fields {
+		if field == nil {
+			t.Errorf("%s is nil", name)
+		}
 	}
 }

@@ -83,52 +83,26 @@ func TestSetAccessToken(t *testing.T) {
 func TestAllServicesInitialized(t *testing.T) {
 	c := NewClient(WithAccessToken("tok"))
 
-	// CRM
-	if c.CRM == nil {
-		t.Fatal("CRM is nil")
+	services := map[string]any{
+		"CRM":                      c.CRM,
+		"CRM.Companies":           c.CRM.Companies,
+		"CRM.Deals":               c.CRM.Deals,
+		"CRM.Owners":              c.CRM.Owners,
+		"CRM.Properties":          c.CRM.Properties,
+		"CMS":                     c.CMS,
+		"Marketing":               c.Marketing,
+		"Automation":              c.Automation,
+		"Conversations":           c.Conversations,
+		"Events":                  c.Events,
+		"Files":                   c.Files,
+		"Settings":                c.Settings,
+		"OAuth":                   c.OAuth,
+		"Webhooks":                c.Webhooks,
+		"CommunicationPreferences": c.CommunicationPreferences,
 	}
-	if c.CRM.Companies == nil {
-		t.Error("CRM.Companies is nil")
-	}
-	if c.CRM.Deals == nil {
-		t.Error("CRM.Deals is nil")
-	}
-	if c.CRM.Owners == nil {
-		t.Error("CRM.Owners is nil")
-	}
-	if c.CRM.Properties == nil {
-		t.Error("CRM.Properties is nil")
-	}
-
-	// All top-level services
-	if c.CMS == nil {
-		t.Error("CMS is nil")
-	}
-	if c.Marketing == nil {
-		t.Error("Marketing is nil")
-	}
-	if c.Automation == nil {
-		t.Error("Automation is nil")
-	}
-	if c.Conversations == nil {
-		t.Error("Conversations is nil")
-	}
-	if c.Events == nil {
-		t.Error("Events is nil")
-	}
-	if c.Files == nil {
-		t.Error("Files is nil")
-	}
-	if c.Settings == nil {
-		t.Error("Settings is nil")
-	}
-	if c.OAuth == nil {
-		t.Error("OAuth is nil")
-	}
-	if c.Webhooks == nil {
-		t.Error("Webhooks is nil")
-	}
-	if c.CommunicationPreferences == nil {
-		t.Error("CommunicationPreferences is nil")
+	for name, svc := range services {
+		if svc == nil {
+			t.Errorf("%s is nil", name)
+		}
 	}
 }

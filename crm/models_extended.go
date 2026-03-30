@@ -11,17 +11,17 @@ import (
 
 // PublicOwner represents a HubSpot owner (user with CRM access).
 type PublicOwner struct {
-	ID                    string      `json:"id"`
-	Email                 string      `json:"email,omitempty"`
-	FirstName             string      `json:"firstName,omitempty"`
-	LastName              string      `json:"lastName,omitempty"`
-	Type                  string      `json:"type"` // PERSON, QUEUE
-	UserID                *int64      `json:"userId,omitempty"`
-	UserIDIncludingInactive *int64    `json:"userIdIncludingInactive,omitempty"`
-	Teams                 []PublicTeam `json:"teams,omitempty"`
-	CreatedAt             time.Time   `json:"createdAt"`
-	UpdatedAt             time.Time   `json:"updatedAt"`
-	Archived              bool        `json:"archived"`
+	ID                      string       `json:"id"`
+	Email                   string       `json:"email,omitempty"`
+	FirstName               string       `json:"firstName,omitempty"`
+	LastName                string       `json:"lastName,omitempty"`
+	Type                    string       `json:"type"` // PERSON, QUEUE
+	UserID                  *int64       `json:"userId,omitempty"`
+	UserIDIncludingInactive *int64       `json:"userIdIncludingInactive,omitempty"`
+	Teams                   []PublicTeam `json:"teams,omitempty"`
+	CreatedAt               time.Time    `json:"createdAt"`
+	UpdatedAt               time.Time    `json:"updatedAt"`
+	Archived                bool         `json:"archived"`
 }
 
 // PublicTeam represents a HubSpot team an owner belongs to.
@@ -63,30 +63,30 @@ const (
 
 // Property represents a HubSpot CRM property definition.
 type Property struct {
-	Name                   string                      `json:"name"`
-	Label                  string                      `json:"label"`
-	Type                   string                      `json:"type"`
-	FieldType              string                      `json:"fieldType"`
-	Description            string                      `json:"description"`
-	GroupName              string                      `json:"groupName"`
-	Options                []PropertyOption            `json:"options"`
-	DisplayOrder           int                         `json:"displayOrder,omitempty"`
-	HasUniqueValue         bool                        `json:"hasUniqueValue,omitempty"`
-	Hidden                 bool                        `json:"hidden,omitempty"`
-	FormField              bool                        `json:"formField,omitempty"`
-	Calculated             bool                        `json:"calculated,omitempty"`
-	ExternalOptions        bool                        `json:"externalOptions,omitempty"`
-	HubSpotDefined         bool                        `json:"hubspotDefined,omitempty"`
-	ShowCurrencySymbol     bool                        `json:"showCurrencySymbol,omitempty"`
-	CalculationFormula     string                      `json:"calculationFormula,omitempty"`
-	ReferencedObjectType   string                      `json:"referencedObjectType,omitempty"`
-	CreatedUserId          string                      `json:"createdUserId,omitempty"`
-	UpdatedUserId          string                      `json:"updatedUserId,omitempty"`
-	ModificationMetadata   *PropertyModificationMetadata `json:"modificationMetadata,omitempty"`
-	CreatedAt              *time.Time                  `json:"createdAt,omitempty"`
-	UpdatedAt              *time.Time                  `json:"updatedAt,omitempty"`
-	ArchivedAt             *time.Time                  `json:"archivedAt,omitempty"`
-	Archived               bool                        `json:"archived,omitempty"`
+	Name                 string                        `json:"name"`
+	Label                string                        `json:"label"`
+	Type                 string                        `json:"type"`
+	FieldType            string                        `json:"fieldType"`
+	Description          string                        `json:"description"`
+	GroupName            string                        `json:"groupName"`
+	Options              []PropertyOption              `json:"options"`
+	DisplayOrder         int                           `json:"displayOrder,omitempty"`
+	HasUniqueValue       bool                          `json:"hasUniqueValue,omitempty"`
+	Hidden               bool                          `json:"hidden,omitempty"`
+	FormField            bool                          `json:"formField,omitempty"`
+	Calculated           bool                          `json:"calculated,omitempty"`
+	ExternalOptions      bool                          `json:"externalOptions,omitempty"`
+	HubSpotDefined       bool                          `json:"hubspotDefined,omitempty"`
+	ShowCurrencySymbol   bool                          `json:"showCurrencySymbol,omitempty"`
+	CalculationFormula   string                        `json:"calculationFormula,omitempty"`
+	ReferencedObjectType string                        `json:"referencedObjectType,omitempty"`
+	CreatedUserId        string                        `json:"createdUserId,omitempty"`
+	UpdatedUserId        string                        `json:"updatedUserId,omitempty"`
+	ModificationMetadata *PropertyModificationMetadata `json:"modificationMetadata,omitempty"`
+	CreatedAt            *time.Time                    `json:"createdAt,omitempty"`
+	UpdatedAt            *time.Time                    `json:"updatedAt,omitempty"`
+	ArchivedAt           *time.Time                    `json:"archivedAt,omitempty"`
+	Archived             bool                          `json:"archived,omitempty"`
 }
 
 // PropertyOption represents a selectable option for enumeration properties.
@@ -117,34 +117,34 @@ type PropertyModificationMetadata struct {
 
 // PropertyCreate is the input for creating a new property.
 type PropertyCreate struct {
-	Name                 string              `json:"name"`
-	Label                string              `json:"label"`
-	Type                 string              `json:"type"`      // string, number, date, datetime, enumeration, bool
-	FieldType            string              `json:"fieldType"` // textarea, text, date, file, number, select, radio, checkbox, booleancheckbox, calculation_equation
-	GroupName            string              `json:"groupName"`
-	Description          string              `json:"description,omitempty"`
+	Name                 string                `json:"name"`
+	Label                string                `json:"label"`
+	Type                 string                `json:"type"`      // string, number, date, datetime, enumeration, bool
+	FieldType            string                `json:"fieldType"` // textarea, text, date, file, number, select, radio, checkbox, booleancheckbox, calculation_equation
+	GroupName            string                `json:"groupName"`
+	Description          string                `json:"description,omitempty"`
 	Options              []PropertyOptionInput `json:"options,omitempty"`
-	DisplayOrder         int                 `json:"displayOrder,omitempty"`
-	HasUniqueValue       bool                `json:"hasUniqueValue,omitempty"`
-	Hidden               bool                `json:"hidden,omitempty"`
-	FormField            bool                `json:"formField,omitempty"`
-	ExternalOptions      bool                `json:"externalOptions,omitempty"`
-	ReferencedObjectType string              `json:"referencedObjectType,omitempty"`
-	CalculationFormula   string              `json:"calculationFormula,omitempty"`
+	DisplayOrder         int                   `json:"displayOrder,omitempty"`
+	HasUniqueValue       bool                  `json:"hasUniqueValue,omitempty"`
+	Hidden               bool                  `json:"hidden,omitempty"`
+	FormField            bool                  `json:"formField,omitempty"`
+	ExternalOptions      bool                  `json:"externalOptions,omitempty"`
+	ReferencedObjectType string                `json:"referencedObjectType,omitempty"`
+	CalculationFormula   string                `json:"calculationFormula,omitempty"`
 }
 
 // PropertyUpdate is the input for updating an existing property.
 type PropertyUpdate struct {
-	Label              string              `json:"label,omitempty"`
-	Type               string              `json:"type,omitempty"`
-	FieldType          string              `json:"fieldType,omitempty"`
-	GroupName          string              `json:"groupName,omitempty"`
-	Description        string              `json:"description,omitempty"`
+	Label              string                `json:"label,omitempty"`
+	Type               string                `json:"type,omitempty"`
+	FieldType          string                `json:"fieldType,omitempty"`
+	GroupName          string                `json:"groupName,omitempty"`
+	Description        string                `json:"description,omitempty"`
 	Options            []PropertyOptionInput `json:"options,omitempty"`
-	DisplayOrder       int                 `json:"displayOrder,omitempty"`
-	Hidden             *bool               `json:"hidden,omitempty"`
-	FormField          *bool               `json:"formField,omitempty"`
-	CalculationFormula string              `json:"calculationFormula,omitempty"`
+	DisplayOrder       int                   `json:"displayOrder,omitempty"`
+	Hidden             *bool                 `json:"hidden,omitempty"`
+	FormField          *bool                 `json:"formField,omitempty"`
+	CalculationFormula string                `json:"calculationFormula,omitempty"`
 }
 
 // PropertyGroup represents a group of CRM properties.
@@ -195,11 +195,11 @@ type PropertyNameInput struct {
 
 // BatchPropertyResult is the response from batch property operations.
 type BatchPropertyResult struct {
-	Status      string      `json:"status"`
-	Results     []*Property `json:"results"`
-	StartedAt   time.Time   `json:"startedAt"`
-	CompletedAt time.Time   `json:"completedAt"`
-	NumErrors   int         `json:"numErrors,omitempty"`
+	Status      string          `json:"status"`
+	Results     []*Property     `json:"results"`
+	StartedAt   time.Time       `json:"startedAt"`
+	CompletedAt time.Time       `json:"completedAt"`
+	NumErrors   int             `json:"numErrors,omitempty"`
 	Errors      []StandardError `json:"errors,omitempty"`
 }
 
@@ -234,8 +234,8 @@ type PipelineStage struct {
 
 // PipelineInput is the input for creating a pipeline.
 type PipelineInput struct {
-	Label        string             `json:"label"`
-	DisplayOrder int                `json:"displayOrder"`
+	Label        string               `json:"label"`
+	DisplayOrder int                  `json:"displayOrder"`
 	Stages       []PipelineStageInput `json:"stages"`
 }
 
@@ -299,57 +299,57 @@ type ObjectTypeDefinitionLabels struct {
 
 // ObjectSchema represents a complete custom object schema with associations and properties.
 type ObjectSchema struct {
-	ID                         string                     `json:"id"`
-	Name                       string                     `json:"name"`
-	Labels                     ObjectTypeDefinitionLabels `json:"labels"`
-	Description                string                     `json:"description,omitempty"`
-	ObjectTypeID               string                     `json:"objectTypeId,omitempty"`
-	FullyQualifiedName         string                     `json:"fullyQualifiedName,omitempty"`
-	PrimaryDisplayProperty     string                     `json:"primaryDisplayProperty,omitempty"`
-	SecondaryDisplayProperties []string                   `json:"secondaryDisplayProperties,omitempty"`
-	RequiredProperties         []string                   `json:"requiredProperties"`
-	SearchableProperties       []string                   `json:"searchableProperties,omitempty"`
-	Properties                 []Property                 `json:"properties"`
+	ID                         string                        `json:"id"`
+	Name                       string                        `json:"name"`
+	Labels                     ObjectTypeDefinitionLabels    `json:"labels"`
+	Description                string                        `json:"description,omitempty"`
+	ObjectTypeID               string                        `json:"objectTypeId,omitempty"`
+	FullyQualifiedName         string                        `json:"fullyQualifiedName,omitempty"`
+	PrimaryDisplayProperty     string                        `json:"primaryDisplayProperty,omitempty"`
+	SecondaryDisplayProperties []string                      `json:"secondaryDisplayProperties,omitempty"`
+	RequiredProperties         []string                      `json:"requiredProperties"`
+	SearchableProperties       []string                      `json:"searchableProperties,omitempty"`
+	Properties                 []Property                    `json:"properties"`
 	Associations               []SchemaAssociationDefinition `json:"associations"`
-	CreatedAt                  *time.Time                 `json:"createdAt,omitempty"`
-	UpdatedAt                  *time.Time                 `json:"updatedAt,omitempty"`
-	Archived                   bool                       `json:"archived,omitempty"`
-	CreatedByUserID            *int64                     `json:"createdByUserId,omitempty"`
-	UpdatedByUserID            *int64                     `json:"updatedByUserId,omitempty"`
+	CreatedAt                  *time.Time                    `json:"createdAt,omitempty"`
+	UpdatedAt                  *time.Time                    `json:"updatedAt,omitempty"`
+	Archived                   bool                          `json:"archived,omitempty"`
+	CreatedByUserID            *int64                        `json:"createdByUserId,omitempty"`
+	UpdatedByUserID            *int64                        `json:"updatedByUserId,omitempty"`
 }
 
 // ObjectSchemaEgg is the input for creating a custom object schema.
 type ObjectSchemaEgg struct {
-	Name                       string                          `json:"name"`
-	Labels                     ObjectTypeDefinitionLabels      `json:"labels"`
-	Description                string                          `json:"description,omitempty"`
-	PrimaryDisplayProperty     string                          `json:"primaryDisplayProperty,omitempty"`
-	SecondaryDisplayProperties []string                        `json:"secondaryDisplayProperties,omitempty"`
-	RequiredProperties         []string                        `json:"requiredProperties"`
-	SearchableProperties       []string                        `json:"searchableProperties,omitempty"`
-	Properties                 []ObjectTypePropertyCreate      `json:"properties"`
-	AssociatedObjects          []string                        `json:"associatedObjects"`
+	Name                       string                     `json:"name"`
+	Labels                     ObjectTypeDefinitionLabels `json:"labels"`
+	Description                string                     `json:"description,omitempty"`
+	PrimaryDisplayProperty     string                     `json:"primaryDisplayProperty,omitempty"`
+	SecondaryDisplayProperties []string                   `json:"secondaryDisplayProperties,omitempty"`
+	RequiredProperties         []string                   `json:"requiredProperties"`
+	SearchableProperties       []string                   `json:"searchableProperties,omitempty"`
+	Properties                 []ObjectTypePropertyCreate `json:"properties"`
+	AssociatedObjects          []string                   `json:"associatedObjects"`
 }
 
 // ObjectTypePropertyCreate is the input for creating a property within a schema.
 type ObjectTypePropertyCreate struct {
-	Name                    string              `json:"name"`
-	Label                   string              `json:"label"`
-	Type                    string              `json:"type"`
-	FieldType               string              `json:"fieldType"`
-	GroupName               string              `json:"groupName,omitempty"`
-	Description             string              `json:"description,omitempty"`
-	Options                 []PropertyOptionInput `json:"options,omitempty"`
-	DisplayOrder            int                 `json:"displayOrder,omitempty"`
-	HasUniqueValue          bool                `json:"hasUniqueValue,omitempty"`
-	Hidden                  bool                `json:"hidden,omitempty"`
-	FormField               bool                `json:"formField,omitempty"`
-	ShowCurrencySymbol      bool                `json:"showCurrencySymbol,omitempty"`
-	ReferencedObjectType    string              `json:"referencedObjectType,omitempty"`
-	TextDisplayHint         string              `json:"textDisplayHint,omitempty"`
-	NumberDisplayHint       string              `json:"numberDisplayHint,omitempty"`
-	OptionSortStrategy      string              `json:"optionSortStrategy,omitempty"`
-	SearchableInGlobalSearch bool               `json:"searchableInGlobalSearch,omitempty"`
+	Name                     string                `json:"name"`
+	Label                    string                `json:"label"`
+	Type                     string                `json:"type"`
+	FieldType                string                `json:"fieldType"`
+	GroupName                string                `json:"groupName,omitempty"`
+	Description              string                `json:"description,omitempty"`
+	Options                  []PropertyOptionInput `json:"options,omitempty"`
+	DisplayOrder             int                   `json:"displayOrder,omitempty"`
+	HasUniqueValue           bool                  `json:"hasUniqueValue,omitempty"`
+	Hidden                   bool                  `json:"hidden,omitempty"`
+	FormField                bool                  `json:"formField,omitempty"`
+	ShowCurrencySymbol       bool                  `json:"showCurrencySymbol,omitempty"`
+	ReferencedObjectType     string                `json:"referencedObjectType,omitempty"`
+	TextDisplayHint          string                `json:"textDisplayHint,omitempty"`
+	NumberDisplayHint        string                `json:"numberDisplayHint,omitempty"`
+	OptionSortStrategy       string                `json:"optionSortStrategy,omitempty"`
+	SearchableInGlobalSearch bool                  `json:"searchableInGlobalSearch,omitempty"`
 }
 
 // ObjectTypeDefinition represents a custom object type definition (returned by update).
@@ -427,29 +427,29 @@ type BatchPublicObjectIDInput struct {
 
 // PublicAssociationResult is a single v3 association result.
 type PublicAssociationResult struct {
-	From    ObjectID `json:"from"`
-	To      []AssociatedID `json:"to"`
-	Paging  *ForwardPaging `json:"paging,omitempty"`
+	From   ObjectID       `json:"from"`
+	To     []AssociatedID `json:"to"`
+	Paging *ForwardPaging `json:"paging,omitempty"`
 }
 
 // BatchPublicAssociationResult is returned by v3 batch create/archive.
 type BatchPublicAssociationResult struct {
-	Status      string                  `json:"status"`
-	Results     []*PublicAssociation    `json:"results"`
-	StartedAt   time.Time              `json:"startedAt"`
-	CompletedAt time.Time              `json:"completedAt"`
-	NumErrors   int                    `json:"numErrors,omitempty"`
-	Errors      []StandardError        `json:"errors,omitempty"`
+	Status      string               `json:"status"`
+	Results     []*PublicAssociation `json:"results"`
+	StartedAt   time.Time            `json:"startedAt"`
+	CompletedAt time.Time            `json:"completedAt"`
+	NumErrors   int                  `json:"numErrors,omitempty"`
+	Errors      []StandardError      `json:"errors,omitempty"`
 }
 
 // BatchPublicAssociationMultiResult is returned by v3 batch read.
 type BatchPublicAssociationMultiResult struct {
 	Status      string                     `json:"status"`
 	Results     []*PublicAssociationResult `json:"results"`
-	StartedAt   time.Time                 `json:"startedAt"`
-	CompletedAt time.Time                 `json:"completedAt"`
-	NumErrors   int                       `json:"numErrors,omitempty"`
-	Errors      []StandardError           `json:"errors,omitempty"`
+	StartedAt   time.Time                  `json:"startedAt"`
+	CompletedAt time.Time                  `json:"completedAt"`
+	NumErrors   int                        `json:"numErrors,omitempty"`
+	Errors      []StandardError            `json:"errors,omitempty"`
 }
 
 // --- Associations v4 models ---
@@ -469,17 +469,17 @@ type AssociationV4SpecWithLabel struct {
 
 // LabelsBetweenObjectPair represents labeled associations between two objects.
 type LabelsBetweenObjectPair struct {
-	FromObjectTypeID string               `json:"fromObjectTypeId"`
-	FromObjectID     int64                `json:"fromObjectId"`
-	ToObjectTypeID   string               `json:"toObjectTypeId"`
-	ToObjectID       int64                `json:"toObjectId"`
+	FromObjectTypeID string                       `json:"fromObjectTypeId"`
+	FromObjectID     int64                        `json:"fromObjectId"`
+	ToObjectTypeID   string                       `json:"toObjectTypeId"`
+	ToObjectID       int64                        `json:"toObjectId"`
 	Labels           []AssociationV4SpecWithLabel `json:"labels,omitempty"`
 }
 
 // MultiAssociatedObjectWithLabel represents a v4 association target with labels.
 type MultiAssociatedObjectWithLabel struct {
-	ToObjectID         int64                        `json:"toObjectId"`
-	AssociationTypes   []AssociationV4SpecWithLabel `json:"associationTypes"`
+	ToObjectID       int64                        `json:"toObjectId"`
+	AssociationTypes []AssociationV4SpecWithLabel `json:"associationTypes"`
 }
 
 // CollectionMultiAssociatedObjectWithLabel is the paged result for v4 getPage.
@@ -490,8 +490,8 @@ type CollectionMultiAssociatedObjectWithLabel struct {
 
 // AssociationV4MultiPost is a single item in a v4 batch create.
 type AssociationV4MultiPost struct {
-	From ObjectID          `json:"from"`
-	To   ObjectID          `json:"to"`
+	From  ObjectID            `json:"from"`
+	To    ObjectID            `json:"to"`
 	Types []AssociationV4Spec `json:"types"`
 }
 
@@ -502,8 +502,8 @@ type BatchAssociationV4MultiPostInput struct {
 
 // AssociationV4MultiArchive is a single item in a v4 batch archive.
 type AssociationV4MultiArchive struct {
-	From ObjectID          `json:"from"`
-	To   ObjectID          `json:"to"`
+	From ObjectID `json:"from"`
+	To   ObjectID `json:"to"`
 }
 
 // BatchAssociationV4MultiArchiveInput is the input for v4 batch archive.
@@ -553,20 +553,20 @@ type PublicDefaultAssociation struct {
 type BatchPublicDefaultAssociationResult struct {
 	Status      string                      `json:"status"`
 	Results     []*PublicDefaultAssociation `json:"results"`
-	StartedAt   time.Time                  `json:"startedAt"`
-	CompletedAt time.Time                  `json:"completedAt"`
-	NumErrors   int                        `json:"numErrors,omitempty"`
-	Errors      []StandardError            `json:"errors,omitempty"`
+	StartedAt   time.Time                   `json:"startedAt"`
+	CompletedAt time.Time                   `json:"completedAt"`
+	NumErrors   int                         `json:"numErrors,omitempty"`
+	Errors      []StandardError             `json:"errors,omitempty"`
 }
 
 // BatchAssociationMultiWithLabelResult is returned by v4 batch getPage.
 type BatchAssociationMultiWithLabelResult struct {
-	Status      string                                    `json:"status"`
+	Status      string                                      `json:"status"`
 	Results     []*CollectionMultiAssociatedObjectWithLabel `json:"results"`
-	StartedAt   time.Time                                 `json:"startedAt"`
-	CompletedAt time.Time                                 `json:"completedAt"`
-	NumErrors   int                                       `json:"numErrors,omitempty"`
-	Errors      []StandardError                           `json:"errors,omitempty"`
+	StartedAt   time.Time                                   `json:"startedAt"`
+	CompletedAt time.Time                                   `json:"completedAt"`
+	NumErrors   int                                         `json:"numErrors,omitempty"`
+	Errors      []StandardError                             `json:"errors,omitempty"`
 }
 
 // --- Associations v4 schema models ---
@@ -579,8 +579,8 @@ type PublicAssociationDefinitionCreateRequest struct {
 
 // PublicAssociationDefinitionUpdateRequest is input for updating a custom association definition.
 type PublicAssociationDefinitionUpdateRequest struct {
-	Label                string `json:"label"`
-	AssociationTypeID    int32  `json:"associationTypeId"`
+	Label             string `json:"label"`
+	AssociationTypeID int32  `json:"associationTypeId"`
 }
 
 // AssociationDefinitionSpecWithLabelResult is the result of listing association definitions.
@@ -594,22 +594,22 @@ type AssociationDefinitionSpecWithLabelResult struct {
 
 // PublicImportResponse represents a HubSpot import.
 type PublicImportResponse struct {
-	ID                 string              `json:"id"`
-	State              string              `json:"state"` // STARTED, PROCESSING, DONE, FAILED, CANCELED, DEFERRED, REVERTED
-	ImportName         string              `json:"importName,omitempty"`
-	ImportSource       string              `json:"importSource,omitempty"` // API, CRM_UI, IMPORT, MOBILE_ANDROID, MOBILE_IOS, SALESFORCE
-	OptOutImport       bool                `json:"optOutImport"`
-	Metadata           ImportMetadata      `json:"metadata"`
-	MappedObjectTypeIds []string           `json:"mappedObjectTypeIds"`
-	ImportRequestJSON  json.RawMessage     `json:"importRequestJson,omitempty"`
-	CreatedAt          time.Time           `json:"createdAt"`
-	UpdatedAt          time.Time           `json:"updatedAt"`
+	ID                  string          `json:"id"`
+	State               string          `json:"state"` // STARTED, PROCESSING, DONE, FAILED, CANCELED, DEFERRED, REVERTED
+	ImportName          string          `json:"importName,omitempty"`
+	ImportSource        string          `json:"importSource,omitempty"` // API, CRM_UI, IMPORT, MOBILE_ANDROID, MOBILE_IOS, SALESFORCE
+	OptOutImport        bool            `json:"optOutImport"`
+	Metadata            ImportMetadata  `json:"metadata"`
+	MappedObjectTypeIds []string        `json:"mappedObjectTypeIds"`
+	ImportRequestJSON   json.RawMessage `json:"importRequestJson,omitempty"`
+	CreatedAt           time.Time       `json:"createdAt"`
+	UpdatedAt           time.Time       `json:"updatedAt"`
 }
 
 // ImportMetadata contains counters and file info for an import.
 type ImportMetadata struct {
-	Counters    map[string]int          `json:"counters"`
-	FileIDs     []string                `json:"fileIds"`
+	Counters    map[string]int           `json:"counters"`
+	FileIDs     []string                 `json:"fileIds"`
 	ObjectLists []PublicObjectListRecord `json:"objectLists"`
 }
 
@@ -627,22 +627,22 @@ type ImportListResult struct {
 
 // ActionResponse is a generic action response.
 type ActionResponse struct {
-	Status      string     `json:"status"`
-	StartedAt   time.Time  `json:"startedAt"`
-	CompletedAt time.Time  `json:"completedAt"`
-	RequestedAt *time.Time `json:"requestedAt,omitempty"`
+	Status      string            `json:"status"`
+	StartedAt   time.Time         `json:"startedAt"`
+	CompletedAt time.Time         `json:"completedAt"`
+	RequestedAt *time.Time        `json:"requestedAt,omitempty"`
 	Links       map[string]string `json:"links,omitempty"`
 }
 
 // PublicImportError represents an error from an import.
 type PublicImportError struct {
-	ErrorType    string `json:"errorType"`
-	ObjectType   string `json:"objectType,omitempty"`
-	InvalidValue string `json:"invalidValue,omitempty"`
-	ExtraContext string `json:"extraContext,omitempty"`
-	ObjectTypeID string `json:"objectTypeId,omitempty"`
-	KnownColumnNumber int `json:"knownColumnNumber,omitempty"`
-	SourceData   ImportRowCore `json:"sourceData,omitempty"`
+	ErrorType         string        `json:"errorType"`
+	ObjectType        string        `json:"objectType,omitempty"`
+	InvalidValue      string        `json:"invalidValue,omitempty"`
+	ExtraContext      string        `json:"extraContext,omitempty"`
+	ObjectTypeID      string        `json:"objectTypeId,omitempty"`
+	KnownColumnNumber int           `json:"knownColumnNumber,omitempty"`
+	SourceData        ImportRowCore `json:"sourceData,omitempty"`
 }
 
 // ImportRowCore represents the source data of an import error row.
@@ -666,10 +666,10 @@ type ImportListOptions struct {
 
 // ImportGetErrorsOptions configures an Imports.GetErrors request.
 type ImportGetErrorsOptions struct {
-	After              string
-	Limit              int
+	After               string
+	Limit               int
 	IncludeErrorMessage bool
-	IncludeRowData     bool
+	IncludeRowData      bool
 }
 
 // =============================================================================
@@ -678,17 +678,17 @@ type ImportGetErrorsOptions struct {
 
 // ExportRequest is the input for starting an export.
 type ExportRequest struct {
-	ExportType     string   `json:"exportType"`     // VIEW, LIST
-	Format         string   `json:"format"`          // XLS, XLSX, CSV
-	ExportName     string   `json:"exportName"`
-	ObjectType     string   `json:"objectType"`
-	ObjectProperties []string `json:"objectProperties"`
-	Language       string   `json:"language"`
-	AssociatedObjectType string `json:"associatedObjectType,omitempty"`
-	ExportInternalValuesOptions []string `json:"exportInternalValuesOptions,omitempty"`
-	OverrideAssociatedObjectsPerDefinitionPerRowLimit bool `json:"overrideAssociatedObjectsPerDefinitionPerRowLimit,omitempty"`
-	ListID         string   `json:"listId,omitempty"`        // For LIST exports
-	PublicCrmSearchRequest *ExportCrmSearchRequest `json:"publicCrmSearchRequest,omitempty"` // For VIEW exports
+	ExportType                                        string                  `json:"exportType"` // VIEW, LIST
+	Format                                            string                  `json:"format"`     // XLS, XLSX, CSV
+	ExportName                                        string                  `json:"exportName"`
+	ObjectType                                        string                  `json:"objectType"`
+	ObjectProperties                                  []string                `json:"objectProperties"`
+	Language                                          string                  `json:"language"`
+	AssociatedObjectType                              string                  `json:"associatedObjectType,omitempty"`
+	ExportInternalValuesOptions                       []string                `json:"exportInternalValuesOptions,omitempty"`
+	OverrideAssociatedObjectsPerDefinitionPerRowLimit bool                    `json:"overrideAssociatedObjectsPerDefinitionPerRowLimit,omitempty"`
+	ListID                                            string                  `json:"listId,omitempty"`                 // For LIST exports
+	PublicCrmSearchRequest                            *ExportCrmSearchRequest `json:"publicCrmSearchRequest,omitempty"` // For VIEW exports
 }
 
 // ExportCrmSearchRequest defines a search filter for VIEW exports.
@@ -713,13 +713,13 @@ type TaskLocator struct {
 
 // ExportStatusResponse is returned when checking export status.
 type ExportStatusResponse struct {
-	Status      string     `json:"status"` // PENDING, PROCESSING, CANCELED, COMPLETE
-	Result      string     `json:"result,omitempty"` // Download URI
-	StartedAt   time.Time  `json:"startedAt"`
-	CompletedAt time.Time  `json:"completedAt"`
-	RequestedAt *time.Time `json:"requestedAt,omitempty"`
-	NumErrors   int        `json:"numErrors,omitempty"`
-	Errors      []StandardError `json:"errors,omitempty"`
+	Status      string            `json:"status"`           // PENDING, PROCESSING, CANCELED, COMPLETE
+	Result      string            `json:"result,omitempty"` // Download URI
+	StartedAt   time.Time         `json:"startedAt"`
+	CompletedAt time.Time         `json:"completedAt"`
+	RequestedAt *time.Time        `json:"requestedAt,omitempty"`
+	NumErrors   int               `json:"numErrors,omitempty"`
+	Errors      []StandardError   `json:"errors,omitempty"`
 	Links       map[string]string `json:"links,omitempty"`
 }
 
@@ -729,22 +729,22 @@ type ExportStatusResponse struct {
 
 // ListCreateRequest is the input for creating a list.
 type ListCreateRequest struct {
-	Name            string `json:"name"`
-	ObjectTypeID    string `json:"objectTypeId"`
-	ProcessingType  string `json:"processingType"` // MANUAL, DYNAMIC, SNAPSHOT
-	FilterBranch    any    `json:"filterBranch,omitempty"` // Complex filter definition
-	ListFolderID    *int64 `json:"listFolderId,omitempty"`
+	Name           string `json:"name"`
+	ObjectTypeID   string `json:"objectTypeId"`
+	ProcessingType string `json:"processingType"`         // MANUAL, DYNAMIC, SNAPSHOT
+	FilterBranch   any    `json:"filterBranch,omitempty"` // Complex filter definition
+	ListFolderID   *int64 `json:"listFolderId,omitempty"`
 }
 
 // ListCreateResponse is returned by Lists.Create.
 type ListCreateResponse struct {
-	ListID          string `json:"listId"`
-	ListVersion     int    `json:"listVersion"`
-	Name            string `json:"name"`
-	ObjectTypeID    string `json:"objectTypeId"`
-	ProcessingType  string `json:"processingType"`
-	CreatedAt       string `json:"createdAt"`
-	UpdatedAt       string `json:"updatedAt"`
+	ListID         string `json:"listId"`
+	ListVersion    int    `json:"listVersion"`
+	Name           string `json:"name"`
+	ObjectTypeID   string `json:"objectTypeId"`
+	ProcessingType string `json:"processingType"`
+	CreatedAt      string `json:"createdAt"`
+	UpdatedAt      string `json:"updatedAt"`
 }
 
 // ListFetchResponse is returned by Lists.GetByID.
@@ -754,16 +754,16 @@ type ListFetchResponse struct {
 
 // HubSpotList represents a HubSpot list.
 type HubSpotList struct {
-	ListID          string `json:"listId"`
-	ListVersion     int    `json:"listVersion"`
-	Name            string `json:"name"`
-	ObjectTypeID    string `json:"objectTypeId"`
-	ProcessingType  string `json:"processingType"`
-	Size            int    `json:"size,omitempty"`
-	CreatedAt       string `json:"createdAt"`
-	UpdatedAt       string `json:"updatedAt"`
-	FilterBranch    any    `json:"filterBranch,omitempty"`
-	ListFolderID    *int64 `json:"listFolderId,omitempty"`
+	ListID         string `json:"listId"`
+	ListVersion    int    `json:"listVersion"`
+	Name           string `json:"name"`
+	ObjectTypeID   string `json:"objectTypeId"`
+	ProcessingType string `json:"processingType"`
+	Size           int    `json:"size,omitempty"`
+	CreatedAt      string `json:"createdAt"`
+	UpdatedAt      string `json:"updatedAt"`
+	FilterBranch   any    `json:"filterBranch,omitempty"`
+	ListFolderID   *int64 `json:"listFolderId,omitempty"`
 }
 
 // ListsByIDResponse is returned by Lists.GetAll.
@@ -773,11 +773,11 @@ type ListsByIDResponse struct {
 
 // ListSearchRequest is the input for searching lists.
 type ListSearchRequest struct {
-	Query           string `json:"query,omitempty"`
-	ListIds         []string `json:"listIds,omitempty"`
-	Offset          int    `json:"offset,omitempty"`
-	Count           int    `json:"count,omitempty"`
-	ProcessingTypes []string `json:"processingTypes,omitempty"`
+	Query                string   `json:"query,omitempty"`
+	ListIds              []string `json:"listIds,omitempty"`
+	Offset               int      `json:"offset,omitempty"`
+	Count                int      `json:"count,omitempty"`
+	ProcessingTypes      []string `json:"processingTypes,omitempty"`
 	AdditionalProperties []string `json:"additionalProperties,omitempty"`
 }
 
@@ -807,26 +807,26 @@ type MembershipChangeRequest struct {
 
 // MembershipsUpdateResponse is returned by membership add/remove operations.
 type MembershipsUpdateResponse struct {
-	RecordIdsAdded    []string `json:"recordIdsAdded,omitempty"`
-	RecordIdsRemoved  []string `json:"recordIdsRemoved,omitempty"`
+	RecordIdsAdded   []string `json:"recordIdsAdded,omitempty"`
+	RecordIdsRemoved []string `json:"recordIdsRemoved,omitempty"`
 }
 
 // JoinTimeAndRecordID represents a membership entry with join time.
 type JoinTimeAndRecordID struct {
-	RecordID  string `json:"recordId"`
-	AddedAt   string `json:"addedAt"`
+	RecordID string `json:"recordId"`
+	AddedAt  string `json:"addedAt"`
 }
 
 // MembershipPageResult is returned by Memberships.GetPage.
 type MembershipPageResult struct {
 	Results []*JoinTimeAndRecordID `json:"results"`
-	Paging  *ForwardPaging          `json:"paging,omitempty"`
+	Paging  *ForwardPaging         `json:"paging,omitempty"`
 }
 
 // RecordListMembership represents a list membership for a record.
 type RecordListMembership struct {
-	ListID    string `json:"listId"`
-	ListName  string `json:"listName,omitempty"`
+	ListID   string `json:"listId"`
+	ListName string `json:"listName,omitempty"`
 }
 
 // RecordListMembershipResult is returned by Memberships.GetLists.
@@ -855,8 +855,8 @@ type ListFolder struct {
 
 // ListFolderFetchResponse is returned by Folders.Get.
 type ListFolderFetchResponse struct {
-	Folder   *ListFolder   `json:"folder,omitempty"`
-	Folders  []*ListFolder `json:"folders,omitempty"`
+	Folder  *ListFolder   `json:"folder,omitempty"`
+	Folders []*ListFolder `json:"folders,omitempty"`
 }
 
 // ListMoveRequest is the input for moving a list to a folder.
@@ -889,15 +889,15 @@ type MembershipListOptions struct {
 
 // TimelineEvent represents a timeline event to create.
 type TimelineEvent struct {
-	EventTemplateID string            `json:"eventTemplateId"`
-	Tokens          map[string]string `json:"tokens"`
-	ID              string            `json:"id,omitempty"`
-	Email           string            `json:"email,omitempty"`
-	UTK             string            `json:"utk,omitempty"`
-	Domain          string            `json:"domain,omitempty"`
-	ObjectID        string            `json:"objectId,omitempty"`
-	Timestamp       *time.Time        `json:"timestamp,omitempty"`
-	ExtraData       any               `json:"extraData,omitempty"`
+	EventTemplateID string               `json:"eventTemplateId"`
+	Tokens          map[string]string    `json:"tokens"`
+	ID              string               `json:"id,omitempty"`
+	Email           string               `json:"email,omitempty"`
+	UTK             string               `json:"utk,omitempty"`
+	Domain          string               `json:"domain,omitempty"`
+	ObjectID        string               `json:"objectId,omitempty"`
+	Timestamp       *time.Time           `json:"timestamp,omitempty"`
+	ExtraData       any                  `json:"extraData,omitempty"`
 	TimelineIFrame  *TimelineEventIFrame `json:"timelineIFrame,omitempty"`
 }
 
@@ -911,17 +911,17 @@ type TimelineEventIFrame struct {
 
 // TimelineEventResponse represents a created/retrieved timeline event.
 type TimelineEventResponse struct {
-	ID              string            `json:"id"`
-	EventTemplateID string            `json:"eventTemplateId"`
-	ObjectType      string            `json:"objectType"`
-	Tokens          map[string]string `json:"tokens"`
-	Email           string            `json:"email,omitempty"`
-	UTK             string            `json:"utk,omitempty"`
-	Domain          string            `json:"domain,omitempty"`
-	ObjectID        string            `json:"objectId,omitempty"`
-	Timestamp       *time.Time        `json:"timestamp,omitempty"`
-	CreatedAt       *time.Time        `json:"createdAt,omitempty"`
-	ExtraData       any               `json:"extraData,omitempty"`
+	ID              string               `json:"id"`
+	EventTemplateID string               `json:"eventTemplateId"`
+	ObjectType      string               `json:"objectType"`
+	Tokens          map[string]string    `json:"tokens"`
+	Email           string               `json:"email,omitempty"`
+	UTK             string               `json:"utk,omitempty"`
+	Domain          string               `json:"domain,omitempty"`
+	ObjectID        string               `json:"objectId,omitempty"`
+	Timestamp       *time.Time           `json:"timestamp,omitempty"`
+	CreatedAt       *time.Time           `json:"createdAt,omitempty"`
+	ExtraData       any                  `json:"extraData,omitempty"`
 	TimelineIFrame  *TimelineEventIFrame `json:"timelineIFrame,omitempty"`
 }
 
@@ -937,7 +937,7 @@ type BatchTimelineEventInput struct {
 
 // BatchTimelineEventResult is returned by batch timeline event creation.
 type BatchTimelineEventResult struct {
-	Status      string                    `json:"status"`
+	Status      string                   `json:"status"`
 	Results     []*TimelineEventResponse `json:"results"`
 	StartedAt   time.Time                `json:"startedAt"`
 	CompletedAt time.Time                `json:"completedAt"`
@@ -1012,34 +1012,34 @@ type TimelineEventTemplateListResult struct {
 
 // CallingSettingsRequest is the input for creating calling settings.
 type CallingSettingsRequest struct {
-	Name                     string `json:"name"`
-	URL                      string `json:"url"`
-	Width                    int    `json:"width,omitempty"`
-	Height                   int    `json:"height,omitempty"`
-	IsReady                  bool   `json:"isReady,omitempty"`
-	SupportsCustomObjects    bool   `json:"supportsCustomObjects,omitempty"`
+	Name                  string `json:"name"`
+	URL                   string `json:"url"`
+	Width                 int    `json:"width,omitempty"`
+	Height                int    `json:"height,omitempty"`
+	IsReady               bool   `json:"isReady,omitempty"`
+	SupportsCustomObjects bool   `json:"supportsCustomObjects,omitempty"`
 }
 
 // CallingSettingsPatchRequest is the input for updating calling settings.
 type CallingSettingsPatchRequest struct {
-	Name                     string `json:"name,omitempty"`
-	URL                      string `json:"url,omitempty"`
-	Width                    int    `json:"width,omitempty"`
-	Height                   int    `json:"height,omitempty"`
-	IsReady                  *bool  `json:"isReady,omitempty"`
-	SupportsCustomObjects    *bool  `json:"supportsCustomObjects,omitempty"`
+	Name                  string `json:"name,omitempty"`
+	URL                   string `json:"url,omitempty"`
+	Width                 int    `json:"width,omitempty"`
+	Height                int    `json:"height,omitempty"`
+	IsReady               *bool  `json:"isReady,omitempty"`
+	SupportsCustomObjects *bool  `json:"supportsCustomObjects,omitempty"`
 }
 
 // CallingSettingsResponse is returned by calling settings operations.
 type CallingSettingsResponse struct {
-	Name                     string     `json:"name"`
-	URL                      string     `json:"url"`
-	Width                    int        `json:"width,omitempty"`
-	Height                   int        `json:"height,omitempty"`
-	IsReady                  bool       `json:"isReady"`
-	SupportsCustomObjects    bool       `json:"supportsCustomObjects"`
-	CreatedAt                time.Time  `json:"createdAt"`
-	UpdatedAt                time.Time  `json:"updatedAt"`
+	Name                  string    `json:"name"`
+	URL                   string    `json:"url"`
+	Width                 int       `json:"width,omitempty"`
+	Height                int       `json:"height,omitempty"`
+	IsReady               bool      `json:"isReady"`
+	SupportsCustomObjects bool      `json:"supportsCustomObjects"`
+	CreatedAt             time.Time `json:"createdAt"`
+	UpdatedAt             time.Time `json:"updatedAt"`
 }
 
 // RecordingSettingsRequest is the input for registering recording URL format.
@@ -1068,24 +1068,24 @@ type MarkRecordingAsReadyRequest struct {
 
 // CardCreateRequest is the input for creating an extension card.
 type CardCreateRequest struct {
-	Title    string         `json:"title"`
-	Fetch    CardFetchBody  `json:"fetch"`
-	Display  CardDisplayBody `json:"display"`
-	Actions  map[string]any `json:"actions,omitempty"`
+	Title   string          `json:"title"`
+	Fetch   CardFetchBody   `json:"fetch"`
+	Display CardDisplayBody `json:"display"`
+	Actions map[string]any  `json:"actions,omitempty"`
 }
 
 // CardPatchRequest is the input for updating a card.
 type CardPatchRequest struct {
-	Title    string          `json:"title,omitempty"`
-	Fetch    *CardFetchBody  `json:"fetch,omitempty"`
-	Display  *CardDisplayBody `json:"display,omitempty"`
-	Actions  map[string]any  `json:"actions,omitempty"`
+	Title   string           `json:"title,omitempty"`
+	Fetch   *CardFetchBody   `json:"fetch,omitempty"`
+	Display *CardDisplayBody `json:"display,omitempty"`
+	Actions map[string]any   `json:"actions,omitempty"`
 }
 
 // CardFetchBody describes how to fetch card data.
 type CardFetchBody struct {
-	TargetURL        string   `json:"targetUrl"`
-	ObjectTypes      []CardObjectType `json:"objectTypes"`
+	TargetURL   string           `json:"targetUrl"`
+	ObjectTypes []CardObjectType `json:"objectTypes"`
 }
 
 // CardObjectType maps an object type to a property list for a card.
@@ -1108,13 +1108,13 @@ type CardDisplayProperty struct {
 
 // PublicCardResponse is returned by card create/update/getById.
 type PublicCardResponse struct {
-	ID       string         `json:"id"`
-	Title    string         `json:"title"`
-	Fetch    CardFetchBody  `json:"fetch"`
-	Display  CardDisplayBody `json:"display"`
-	Actions  map[string]any `json:"actions,omitempty"`
-	CreatedAt time.Time     `json:"createdAt"`
-	UpdatedAt time.Time     `json:"updatedAt"`
+	ID        string          `json:"id"`
+	Title     string          `json:"title"`
+	Fetch     CardFetchBody   `json:"fetch"`
+	Display   CardDisplayBody `json:"display"`
+	Actions   map[string]any  `json:"actions,omitempty"`
+	CreatedAt time.Time       `json:"createdAt"`
+	UpdatedAt time.Time       `json:"updatedAt"`
 }
 
 // PublicCardListResponse is returned by cards.GetAll.

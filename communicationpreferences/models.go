@@ -6,17 +6,17 @@ import "time"
 
 // SubscriptionDefinition represents a communication subscription type.
 type SubscriptionDefinition struct {
-	IsInternal          bool       `json:"isInternal"`
-	CreatedAt           time.Time  `json:"createdAt"`
-	IsDefault           bool       `json:"isDefault"`
-	CommunicationMethod string     `json:"communicationMethod,omitempty"`
-	Purpose             string     `json:"purpose,omitempty"`
-	Name                string     `json:"name"`
-	Description         string     `json:"description"`
-	ID                  string     `json:"id"`
-	IsActive            bool       `json:"isActive"`
-	BusinessUnitID      *int64     `json:"businessUnitId,omitempty"`
-	UpdatedAt           time.Time  `json:"updatedAt"`
+	IsInternal          bool      `json:"isInternal"`
+	CreatedAt           time.Time `json:"createdAt"`
+	IsDefault           bool      `json:"isDefault"`
+	CommunicationMethod string    `json:"communicationMethod,omitempty"`
+	Purpose             string    `json:"purpose,omitempty"`
+	Name                string    `json:"name"`
+	Description         string    `json:"description"`
+	ID                  string    `json:"id"`
+	IsActive            bool      `json:"isActive"`
+	BusinessUnitID      *int64    `json:"businessUnitId,omitempty"`
+	UpdatedAt           time.Time `json:"updatedAt"`
 }
 
 // SubscriptionDefinitionsResponse contains a list of subscription definitions.
@@ -42,7 +42,7 @@ type PublicSubscriptionStatus struct {
 // PublicSubscriptionStatusesResponse contains subscription statuses for a recipient.
 type PublicSubscriptionStatusesResponse struct {
 	Recipient            string                      `json:"recipient"`
-	SubscriptionStatuses []*PublicSubscriptionStatus  `json:"subscriptionStatuses"`
+	SubscriptionStatuses []*PublicSubscriptionStatus `json:"subscriptionStatuses"`
 }
 
 // PublicUpdateSubscriptionStatusRequest is the body for subscribing or unsubscribing.
@@ -72,7 +72,7 @@ const (
 
 // Well-known values for SourceOfStatus.
 const (
-	SourcePortalWideStatus  = "PORTAL_WIDE_STATUS"
-	SourceBrandWideStatus   = "BRAND_WIDE_STATUS"
+	SourcePortalWideStatus   = "PORTAL_WIDE_STATUS"
+	SourceBrandWideStatus    = "BRAND_WIDE_STATUS"
 	SourceSubscriptionStatus = "SUBSCRIPTION_STATUS"
 )

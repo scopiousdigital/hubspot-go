@@ -19,49 +19,49 @@ type NextPage struct {
 
 // FormDefinition represents a HubSpot form definition as returned by the API.
 type FormDefinition struct {
-	ID                  string              `json:"id"`
-	FormType            string              `json:"formType"`
-	Name                string              `json:"name"`
-	CreatedAt           time.Time           `json:"createdAt"`
-	UpdatedAt           time.Time           `json:"updatedAt"`
-	Archived            bool                `json:"archived"`
-	ArchivedAt          *time.Time          `json:"archivedAt,omitempty"`
-	FieldGroups         []FieldGroup        `json:"fieldGroups"`
-	Configuration       map[string]any      `json:"configuration,omitempty"`
-	DisplayOptions      map[string]any      `json:"displayOptions,omitempty"`
-	LegalConsentOptions map[string]any      `json:"legalConsentOptions,omitempty"`
+	ID                  string         `json:"id"`
+	FormType            string         `json:"formType"`
+	Name                string         `json:"name"`
+	CreatedAt           time.Time      `json:"createdAt"`
+	UpdatedAt           time.Time      `json:"updatedAt"`
+	Archived            bool           `json:"archived"`
+	ArchivedAt          *time.Time     `json:"archivedAt,omitempty"`
+	FieldGroups         []FieldGroup   `json:"fieldGroups"`
+	Configuration       map[string]any `json:"configuration,omitempty"`
+	DisplayOptions      map[string]any `json:"displayOptions,omitempty"`
+	LegalConsentOptions map[string]any `json:"legalConsentOptions,omitempty"`
 }
 
 // FieldGroup represents a group of fields in a form.
 type FieldGroup struct {
-	GroupType    string           `json:"groupType"`
-	RichTextType string          `json:"richTextType"`
-	RichText     string          `json:"richText,omitempty"`
-	Fields       []FormField     `json:"fields"`
+	GroupType    string      `json:"groupType"`
+	RichTextType string      `json:"richTextType"`
+	RichText     string      `json:"richText,omitempty"`
+	Fields       []FormField `json:"fields"`
 }
 
 // FormField represents a single field in a form field group.
 type FormField struct {
-	Name             string           `json:"name"`
-	Label            string           `json:"label"`
-	FieldType        string           `json:"fieldType,omitempty"`
-	ObjectTypeID     string           `json:"objectTypeId,omitempty"`
-	Required         bool             `json:"required,omitempty"`
-	Hidden           bool             `json:"hidden,omitempty"`
-	Description      string           `json:"description,omitempty"`
-	DefaultValue     string           `json:"defaultValue,omitempty"`
-	Placeholder      string           `json:"placeholder,omitempty"`
-	Options          []FieldOption    `json:"options,omitempty"`
-	Validation       map[string]any   `json:"validation,omitempty"`
-	DependentFields  []map[string]any `json:"dependentFields,omitempty"`
+	Name            string           `json:"name"`
+	Label           string           `json:"label"`
+	FieldType       string           `json:"fieldType,omitempty"`
+	ObjectTypeID    string           `json:"objectTypeId,omitempty"`
+	Required        bool             `json:"required,omitempty"`
+	Hidden          bool             `json:"hidden,omitempty"`
+	Description     string           `json:"description,omitempty"`
+	DefaultValue    string           `json:"defaultValue,omitempty"`
+	Placeholder     string           `json:"placeholder,omitempty"`
+	Options         []FieldOption    `json:"options,omitempty"`
+	Validation      map[string]any   `json:"validation,omitempty"`
+	DependentFields []map[string]any `json:"dependentFields,omitempty"`
 }
 
 // FieldOption represents an option for enumerated form fields.
 type FieldOption struct {
-	Label       string `json:"label"`
-	Value       string `json:"value"`
-	Description string `json:"description,omitempty"`
-	DisplayOrder int   `json:"displayOrder,omitempty"`
+	Label        string `json:"label"`
+	Value        string `json:"value"`
+	Description  string `json:"description,omitempty"`
+	DisplayOrder int    `json:"displayOrder,omitempty"`
 }
 
 // FormCreateRequest is the input for creating a new form.
@@ -213,7 +213,7 @@ type AbTestCreateRequest struct {
 // EmailListResult is a paginated list of marketing emails.
 type EmailListResult struct {
 	Total   int            `json:"total"`
-	Results []PublicEmail   `json:"results"`
+	Results []PublicEmail  `json:"results"`
 	Paging  *ForwardPaging `json:"paging,omitempty"`
 }
 
@@ -279,10 +279,10 @@ type EmailRevisionsOptions struct {
 
 // EmailStatisticsData contains counters, ratios, etc. for email performance.
 type EmailStatisticsData struct {
-	Counters        map[string]int                `json:"counters,omitempty"`
-	Ratios          map[string]float64            `json:"ratios,omitempty"`
-	DeviceBreakdown map[string]map[string]int     `json:"deviceBreakdown,omitempty"`
-	QualifierStats  map[string]map[string]int     `json:"qualifierStats,omitempty"`
+	Counters        map[string]int            `json:"counters,omitempty"`
+	Ratios          map[string]float64        `json:"ratios,omitempty"`
+	DeviceBreakdown map[string]map[string]int `json:"deviceBreakdown,omitempty"`
+	QualifierStats  map[string]map[string]int `json:"qualifierStats,omitempty"`
 }
 
 // AggregateEmailStatistics contains aggregate statistics for one or more emails.
@@ -399,25 +399,25 @@ type MarketingEventPublicDefaultResponse struct {
 
 // MarketingEventReadResponse is the response for reading an event by external IDs.
 type MarketingEventReadResponse struct {
-	ID                string          `json:"id"`
-	ObjectID          string          `json:"objectId,omitempty"`
-	ExternalEventID   string          `json:"externalEventId"`
-	EventName         string          `json:"eventName"`
-	EventOrganizer    string          `json:"eventOrganizer"`
-	EventDescription  string          `json:"eventDescription,omitempty"`
-	EventURL          string          `json:"eventUrl,omitempty"`
-	EventType         string          `json:"eventType,omitempty"`
-	EventCancelled    *bool           `json:"eventCancelled,omitempty"`
-	EventCompleted    *bool           `json:"eventCompleted,omitempty"`
-	StartDateTime     *time.Time      `json:"startDateTime,omitempty"`
-	EndDateTime       *time.Time      `json:"endDateTime,omitempty"`
-	CustomProperties  []PropertyValue `json:"customProperties,omitempty"`
-	Registrants       int             `json:"registrants"`
-	Attendees         int             `json:"attendees"`
-	Cancellations     int             `json:"cancellations"`
-	NoShows           int             `json:"noShows"`
-	CreatedAt         time.Time       `json:"createdAt"`
-	UpdatedAt         time.Time       `json:"updatedAt"`
+	ID               string          `json:"id"`
+	ObjectID         string          `json:"objectId,omitempty"`
+	ExternalEventID  string          `json:"externalEventId"`
+	EventName        string          `json:"eventName"`
+	EventOrganizer   string          `json:"eventOrganizer"`
+	EventDescription string          `json:"eventDescription,omitempty"`
+	EventURL         string          `json:"eventUrl,omitempty"`
+	EventType        string          `json:"eventType,omitempty"`
+	EventCancelled   *bool           `json:"eventCancelled,omitempty"`
+	EventCompleted   *bool           `json:"eventCompleted,omitempty"`
+	StartDateTime    *time.Time      `json:"startDateTime,omitempty"`
+	EndDateTime      *time.Time      `json:"endDateTime,omitempty"`
+	CustomProperties []PropertyValue `json:"customProperties,omitempty"`
+	Registrants      int             `json:"registrants"`
+	Attendees        int             `json:"attendees"`
+	Cancellations    int             `json:"cancellations"`
+	NoShows          int             `json:"noShows"`
+	CreatedAt        time.Time       `json:"createdAt"`
+	UpdatedAt        time.Time       `json:"updatedAt"`
 }
 
 // MarketingEventReadResponseV2 is the V2 response for reading an event by object ID.
@@ -659,10 +659,10 @@ type SingleSendEmail struct {
 
 // SingleSendRequest is the input for sending a single transactional email.
 type SingleSendRequest struct {
-	EmailID            int               `json:"emailId"`
-	Message            SingleSendEmail   `json:"message"`
-	ContactProperties  map[string]string `json:"contactProperties,omitempty"`
-	CustomProperties   map[string]any    `json:"customProperties,omitempty"`
+	EmailID           int               `json:"emailId"`
+	Message           SingleSendEmail   `json:"message"`
+	ContactProperties map[string]string `json:"contactProperties,omitempty"`
+	CustomProperties  map[string]any    `json:"customProperties,omitempty"`
 }
 
 // EmailSendStatusView is the response for a transactional email send.

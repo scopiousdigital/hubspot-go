@@ -37,65 +37,70 @@ type SiteSearchOptions struct {
 	GroupID         []int
 }
 
+// values encodes the search options as URL query parameters.
+func (o *SiteSearchOptions) values() url.Values {
+	q := url.Values{}
+	if o == nil {
+		return q
+	}
+	if o.Query != "" {
+		q.Set("q", o.Query)
+	}
+	if o.Limit > 0 {
+		q.Set("limit", strconv.Itoa(o.Limit))
+	}
+	if o.Offset > 0 {
+		q.Set("offset", strconv.Itoa(o.Offset))
+	}
+	if o.Language != "" {
+		q.Set("language", o.Language)
+	}
+	if o.MatchPrefix != nil {
+		q.Set("matchPrefix", strconv.FormatBool(*o.MatchPrefix))
+	}
+	if o.Autocomplete != nil {
+		q.Set("autocomplete", strconv.FormatBool(*o.Autocomplete))
+	}
+	if o.PopularityBoost != nil {
+		q.Set("popularityBoost", strconv.FormatFloat(*o.PopularityBoost, 'f', -1, 64))
+	}
+	if o.BoostLimit != nil {
+		q.Set("boostLimit", strconv.FormatFloat(*o.BoostLimit, 'f', -1, 64))
+	}
+	if o.BoostRecent != "" {
+		q.Set("boostRecent", o.BoostRecent)
+	}
+	if o.TableID != nil {
+		q.Set("tableId", strconv.Itoa(*o.TableID))
+	}
+	if o.HubDBQuery != "" {
+		q.Set("hubdbQuery", o.HubDBQuery)
+	}
+	for _, d := range o.Domain {
+		q.Add("domain", d)
+	}
+	for _, t := range o.Type {
+		q.Add("type", t)
+	}
+	for _, p := range o.PathPrefix {
+		q.Add("pathPrefix", p)
+	}
+	for _, p := range o.Property {
+		q.Add("property", p)
+	}
+	if o.Length != "" {
+		q.Set("length", o.Length)
+	}
+	for _, g := range o.GroupID {
+		q.Add("groupId", strconv.Itoa(g))
+	}
+	return q
+}
+
 // Search performs a site search.
 func (s *SiteSearchService) Search(ctx context.Context, opts *SiteSearchOptions) (*SearchResults, error) {
-	path := siteSearchBasePath + "/search"
-	q := url.Values{}
-	if opts != nil {
-		if opts.Query != "" {
-			q.Set("q", opts.Query)
-		}
-		if opts.Limit > 0 {
-			q.Set("limit", strconv.Itoa(opts.Limit))
-		}
-		if opts.Offset > 0 {
-			q.Set("offset", strconv.Itoa(opts.Offset))
-		}
-		if opts.Language != "" {
-			q.Set("language", opts.Language)
-		}
-		if opts.MatchPrefix != nil {
-			q.Set("matchPrefix", strconv.FormatBool(*opts.MatchPrefix))
-		}
-		if opts.Autocomplete != nil {
-			q.Set("autocomplete", strconv.FormatBool(*opts.Autocomplete))
-		}
-		if opts.PopularityBoost != nil {
-			q.Set("popularityBoost", strconv.FormatFloat(*opts.PopularityBoost, 'f', -1, 64))
-		}
-		if opts.BoostLimit != nil {
-			q.Set("boostLimit", strconv.FormatFloat(*opts.BoostLimit, 'f', -1, 64))
-		}
-		if opts.BoostRecent != "" {
-			q.Set("boostRecent", opts.BoostRecent)
-		}
-		if opts.TableID != nil {
-			q.Set("tableId", strconv.Itoa(*opts.TableID))
-		}
-		if opts.HubDBQuery != "" {
-			q.Set("hubdbQuery", opts.HubDBQuery)
-		}
-		for _, d := range opts.Domain {
-			q.Add("domain", d)
-		}
-		for _, t := range opts.Type {
-			q.Add("type", t)
-		}
-		for _, p := range opts.PathPrefix {
-			q.Add("pathPrefix", p)
-		}
-		for _, p := range opts.Property {
-			q.Add("property", p)
-		}
-		if opts.Length != "" {
-			q.Set("length", opts.Length)
-		}
-		for _, g := range opts.GroupID {
-			q.Add("groupId", strconv.Itoa(g))
-		}
-	}
 	var result SearchResults
-	if err := s.requester.Get(ctx, path, q, &result); err != nil {
+	if err := s.requester.Get(ctx, siteSearchBasePath+"/search", opts.values(), &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

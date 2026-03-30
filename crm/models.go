@@ -29,7 +29,7 @@ func (p *Properties) UnmarshalJSON(data []byte) error {
 type SimplePublicObject struct {
 	ID                    string                          `json:"id"`
 	Properties            Properties                      `json:"properties"`
-	PropertiesWithHistory map[string][]ValueWithTimestamp  `json:"propertiesWithHistory,omitempty"`
+	PropertiesWithHistory map[string][]ValueWithTimestamp `json:"propertiesWithHistory,omitempty"`
 	CreatedAt             time.Time                       `json:"createdAt"`
 	UpdatedAt             time.Time                       `json:"updatedAt"`
 	Archived              bool                            `json:"archived"`
@@ -39,14 +39,14 @@ type SimplePublicObject struct {
 
 // SimplePublicObjectWithAssociations includes association data.
 type SimplePublicObjectWithAssociations struct {
-	ID                    string                                      `json:"id"`
-	Properties            Properties                                  `json:"properties"`
-	PropertiesWithHistory map[string][]ValueWithTimestamp              `json:"propertiesWithHistory,omitempty"`
-	Associations          map[string]CollectionResponseAssociatedID    `json:"associations,omitempty"`
-	CreatedAt             time.Time                                   `json:"createdAt"`
-	UpdatedAt             time.Time                                   `json:"updatedAt"`
-	Archived              bool                                        `json:"archived"`
-	ArchivedAt            *time.Time                                  `json:"archivedAt,omitempty"`
+	ID                    string                                    `json:"id"`
+	Properties            Properties                                `json:"properties"`
+	PropertiesWithHistory map[string][]ValueWithTimestamp           `json:"propertiesWithHistory,omitempty"`
+	Associations          map[string]CollectionResponseAssociatedID `json:"associations,omitempty"`
+	CreatedAt             time.Time                                 `json:"createdAt"`
+	UpdatedAt             time.Time                                 `json:"updatedAt"`
+	Archived              bool                                      `json:"archived"`
+	ArchivedAt            *time.Time                                `json:"archivedAt,omitempty"`
 }
 
 // SimplePublicObjectInput is used for updating an existing object.
@@ -57,7 +57,7 @@ type SimplePublicObjectInput struct {
 
 // SimplePublicObjectInputForCreate is used for creating a new object.
 type SimplePublicObjectInputForCreate struct {
-	Properties         Properties                   `json:"properties"`
+	Properties         Properties                    `json:"properties"`
 	Associations       []PublicAssociationsForObject `json:"associations,omitempty"`
 	ObjectWriteTraceID string                        `json:"objectWriteTraceId,omitempty"`
 }
@@ -66,7 +66,7 @@ type SimplePublicObjectInputForCreate struct {
 type SimplePublicUpsertObject struct {
 	ID                    string                          `json:"id"`
 	Properties            Properties                      `json:"properties"`
-	PropertiesWithHistory map[string][]ValueWithTimestamp  `json:"propertiesWithHistory,omitempty"`
+	PropertiesWithHistory map[string][]ValueWithTimestamp `json:"propertiesWithHistory,omitempty"`
 	CreatedAt             time.Time                       `json:"createdAt"`
 	UpdatedAt             time.Time                       `json:"updatedAt"`
 	Archived              bool                            `json:"archived"`
@@ -138,9 +138,9 @@ type ListResult struct {
 
 // SearchResult is returned by Search operations.
 type SearchResult struct {
-	Total   int                    `json:"total"`
-	Results []*SimplePublicObject  `json:"results"`
-	Paging  *ForwardPaging         `json:"paging,omitempty"`
+	Total   int                   `json:"total"`
+	Results []*SimplePublicObject `json:"results"`
+	Paging  *ForwardPaging        `json:"paging,omitempty"`
 }
 
 // --- Batch input types ---
@@ -193,14 +193,14 @@ type BatchReadInput struct {
 
 // BatchResult is returned by batch create/read/update operations.
 type BatchResult struct {
-	Status      string                 `json:"status"` // PENDING, PROCESSING, CANCELED, COMPLETE
-	Results     []*SimplePublicObject  `json:"results"`
-	RequestedAt *time.Time             `json:"requestedAt,omitempty"`
-	StartedAt   time.Time              `json:"startedAt"`
-	CompletedAt time.Time              `json:"completedAt"`
-	Links       map[string]string      `json:"links,omitempty"`
-	NumErrors   int                    `json:"numErrors,omitempty"`
-	Errors      []StandardError        `json:"errors,omitempty"`
+	Status      string                `json:"status"` // PENDING, PROCESSING, CANCELED, COMPLETE
+	Results     []*SimplePublicObject `json:"results"`
+	RequestedAt *time.Time            `json:"requestedAt,omitempty"`
+	StartedAt   time.Time             `json:"startedAt"`
+	CompletedAt time.Time             `json:"completedAt"`
+	Links       map[string]string     `json:"links,omitempty"`
+	NumErrors   int                   `json:"numErrors,omitempty"`
+	Errors      []StandardError       `json:"errors,omitempty"`
 }
 
 // BatchUpsertResult is returned by batch upsert operations.

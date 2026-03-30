@@ -7,13 +7,13 @@ type APIError struct {
 	// HTTPStatusCode is the HTTP status code of the response.
 	HTTPStatusCode int `json:"-"`
 
-	Status        string            `json:"status"`
-	Message       string            `json:"message"`
-	CorrelationID string            `json:"correlationId"`
-	Category      string            `json:"category"`
-	SubCategory   string            `json:"subCategory,omitempty"`
-	Errors        []ErrorDetail     `json:"errors,omitempty"`
-	Links         map[string]string `json:"links,omitempty"`
+	Status        string              `json:"status"`
+	Message       string              `json:"message"`
+	CorrelationID string              `json:"correlationId"`
+	Category      string              `json:"category"`
+	SubCategory   string              `json:"subCategory,omitempty"`
+	Errors        []ErrorDetail       `json:"errors,omitempty"`
+	Links         map[string]string   `json:"links,omitempty"`
 	Context       map[string][]string `json:"context,omitempty"`
 }
 

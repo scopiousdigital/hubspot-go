@@ -31,33 +31,33 @@ type PreviousPage struct {
 
 // BlogPost represents a HubSpot CMS blog post.
 type BlogPost struct {
-	ID                 string     `json:"id,omitempty"`
-	Name               string     `json:"name,omitempty"`
-	Slug               string     `json:"slug,omitempty"`
-	ContentGroupID     string     `json:"contentGroupId,omitempty"`
-	Campaign           string     `json:"campaign,omitempty"`
-	CategoryID         int64      `json:"categoryId,omitempty"`
-	State              string     `json:"state,omitempty"`
-	AuthorName         string     `json:"authorName,omitempty"`
-	BlogAuthorID       string     `json:"blogAuthorId,omitempty"`
-	TagIDs             []int64    `json:"tagIds,omitempty"`
-	HtmlTitle          string     `json:"htmlTitle,omitempty"`
-	PostBody           string     `json:"postBody,omitempty"`
-	PostSummary        string     `json:"postSummary,omitempty"`
-	RssBody            string     `json:"rssBody,omitempty"`
-	RssSummary         string     `json:"rssSummary,omitempty"`
-	MetaDescription    string     `json:"metaDescription,omitempty"`
-	FeaturedImage      string     `json:"featuredImage,omitempty"`
-	FeaturedImageAltText string  `json:"featuredImageAltText,omitempty"`
-	CurrentState       string     `json:"currentState,omitempty"`
-	Language           string     `json:"language,omitempty"`
-	TranslatedFromID   string     `json:"translatedFromId,omitempty"`
-	PublishDate        *time.Time `json:"publishDate,omitempty"`
-	Created            *time.Time `json:"created,omitempty"`
-	Updated            *time.Time `json:"updated,omitempty"`
-	ArchivedAt         *time.Time `json:"archivedAt,omitempty"`
-	Archived           bool       `json:"archived,omitempty"`
-	URL                string     `json:"url,omitempty"`
+	ID                   string     `json:"id,omitempty"`
+	Name                 string     `json:"name,omitempty"`
+	Slug                 string     `json:"slug,omitempty"`
+	ContentGroupID       string     `json:"contentGroupId,omitempty"`
+	Campaign             string     `json:"campaign,omitempty"`
+	CategoryID           int64      `json:"categoryId,omitempty"`
+	State                string     `json:"state,omitempty"`
+	AuthorName           string     `json:"authorName,omitempty"`
+	BlogAuthorID         string     `json:"blogAuthorId,omitempty"`
+	TagIDs               []int64    `json:"tagIds,omitempty"`
+	HtmlTitle            string     `json:"htmlTitle,omitempty"`
+	PostBody             string     `json:"postBody,omitempty"`
+	PostSummary          string     `json:"postSummary,omitempty"`
+	RssBody              string     `json:"rssBody,omitempty"`
+	RssSummary           string     `json:"rssSummary,omitempty"`
+	MetaDescription      string     `json:"metaDescription,omitempty"`
+	FeaturedImage        string     `json:"featuredImage,omitempty"`
+	FeaturedImageAltText string     `json:"featuredImageAltText,omitempty"`
+	CurrentState         string     `json:"currentState,omitempty"`
+	Language             string     `json:"language,omitempty"`
+	TranslatedFromID     string     `json:"translatedFromId,omitempty"`
+	PublishDate          *time.Time `json:"publishDate,omitempty"`
+	Created              *time.Time `json:"created,omitempty"`
+	Updated              *time.Time `json:"updated,omitempty"`
+	ArchivedAt           *time.Time `json:"archivedAt,omitempty"`
+	Archived             bool       `json:"archived,omitempty"`
+	URL                  string     `json:"url,omitempty"`
 }
 
 // BlogAuthor represents a blog author.
@@ -103,11 +103,11 @@ type BatchInputBlogPost struct {
 
 // BatchResponseBlogPost is the response for batch blog post operations.
 type BatchResponseBlogPost struct {
-	Status      string      `json:"status"`
-	Results     []*BlogPost `json:"results"`
-	StartedAt   time.Time   `json:"startedAt"`
-	CompletedAt time.Time   `json:"completedAt"`
-	NumErrors   int         `json:"numErrors,omitempty"`
+	Status      string          `json:"status"`
+	Results     []*BlogPost     `json:"results"`
+	StartedAt   time.Time       `json:"startedAt"`
+	CompletedAt time.Time       `json:"completedAt"`
+	NumErrors   int             `json:"numErrors,omitempty"`
 	Errors      []StandardError `json:"errors,omitempty"`
 }
 
@@ -118,11 +118,11 @@ type BatchInputBlogAuthor struct {
 
 // BatchResponseBlogAuthor is the response for batch blog author operations.
 type BatchResponseBlogAuthor struct {
-	Status      string        `json:"status"`
-	Results     []*BlogAuthor `json:"results"`
-	StartedAt   time.Time     `json:"startedAt"`
-	CompletedAt time.Time     `json:"completedAt"`
-	NumErrors   int           `json:"numErrors,omitempty"`
+	Status      string          `json:"status"`
+	Results     []*BlogAuthor   `json:"results"`
+	StartedAt   time.Time       `json:"startedAt"`
+	CompletedAt time.Time       `json:"completedAt"`
+	NumErrors   int             `json:"numErrors,omitempty"`
 	Errors      []StandardError `json:"errors,omitempty"`
 }
 
@@ -133,11 +133,11 @@ type BatchInputBlogTag struct {
 
 // BatchResponseBlogTag is the response for batch blog tag operations.
 type BatchResponseBlogTag struct {
-	Status      string     `json:"status"`
-	Results     []*BlogTag `json:"results"`
-	StartedAt   time.Time  `json:"startedAt"`
-	CompletedAt time.Time  `json:"completedAt"`
-	NumErrors   int        `json:"numErrors,omitempty"`
+	Status      string          `json:"status"`
+	Results     []*BlogTag      `json:"results"`
+	StartedAt   time.Time       `json:"startedAt"`
+	CompletedAt time.Time       `json:"completedAt"`
+	NumErrors   int             `json:"numErrors,omitempty"`
 	Errors      []StandardError `json:"errors,omitempty"`
 }
 
@@ -145,22 +145,22 @@ type BatchResponseBlogTag struct {
 
 // BlogPostListResult is the paginated response for blog posts.
 type BlogPostListResult struct {
-	Total   int         `json:"total"`
-	Results []*BlogPost `json:"results"`
+	Total   int            `json:"total"`
+	Results []*BlogPost    `json:"results"`
 	Paging  *ForwardPaging `json:"paging,omitempty"`
 }
 
 // BlogAuthorListResult is the paginated response for blog authors.
 type BlogAuthorListResult struct {
-	Total   int           `json:"total"`
-	Results []*BlogAuthor `json:"results"`
+	Total   int            `json:"total"`
+	Results []*BlogAuthor  `json:"results"`
 	Paging  *ForwardPaging `json:"paging,omitempty"`
 }
 
 // BlogTagListResult is the paginated response for blog tags.
 type BlogTagListResult struct {
-	Total   int        `json:"total"`
-	Results []*BlogTag `json:"results"`
+	Total   int            `json:"total"`
+	Results []*BlogTag     `json:"results"`
 	Paging  *ForwardPaging `json:"paging,omitempty"`
 }
 
@@ -191,9 +191,9 @@ type User struct {
 
 // AttachToLangPrimaryRequest is used to attach content to a language group.
 type AttachToLangPrimaryRequest struct {
-	ID         string `json:"id"`
-	Language   string `json:"language"`
-	PrimaryID  string `json:"primaryId"`
+	ID        string `json:"id"`
+	Language  string `json:"language"`
+	PrimaryID string `json:"primaryId"`
 }
 
 // DetachFromLangGroupRequest is used to detach content from a language group.
@@ -222,8 +222,8 @@ type LanguageCloneRequest struct {
 
 // ContentCloneRequest is used to clone content items.
 type ContentCloneRequest struct {
-	ID             string `json:"id"`
-	CloneName      string `json:"cloneName,omitempty"`
+	ID        string `json:"id"`
+	CloneName string `json:"cloneName,omitempty"`
 }
 
 // ContentScheduleRequest is used to schedule content for publishing.
@@ -271,45 +271,45 @@ type ErrorDetail struct {
 
 // HubDbTable represents a HubDB table.
 type HubDbTable struct {
-	ID                string           `json:"id,omitempty"`
-	Name              string           `json:"name,omitempty"`
-	Label             string           `json:"label,omitempty"`
-	Columns           []*HubDbColumn   `json:"columns,omitempty"`
-	Published         bool             `json:"published,omitempty"`
-	RowCount          int              `json:"rowCount,omitempty"`
-	CreatedBy         *User            `json:"createdBy,omitempty"`
-	UpdatedBy         *User            `json:"updatedBy,omitempty"`
-	PublishedAt       *time.Time       `json:"publishedAt,omitempty"`
-	AllowPublicAPIAccess bool          `json:"allowPublicApiAccess,omitempty"`
-	UseForPages       bool             `json:"useForPages,omitempty"`
-	EnableChildTablePages bool         `json:"enableChildTablePages,omitempty"`
-	DynamicMetaTags   map[string]int   `json:"dynamicMetaTags,omitempty"`
-	AllowChildTables  bool             `json:"allowChildTables,omitempty"`
-	CreatedAt         *time.Time       `json:"createdAt,omitempty"`
-	UpdatedAt         *time.Time       `json:"updatedAt,omitempty"`
-	Archived          bool             `json:"archived,omitempty"`
+	ID                    string         `json:"id,omitempty"`
+	Name                  string         `json:"name,omitempty"`
+	Label                 string         `json:"label,omitempty"`
+	Columns               []*HubDbColumn `json:"columns,omitempty"`
+	Published             bool           `json:"published,omitempty"`
+	RowCount              int            `json:"rowCount,omitempty"`
+	CreatedBy             *User          `json:"createdBy,omitempty"`
+	UpdatedBy             *User          `json:"updatedBy,omitempty"`
+	PublishedAt           *time.Time     `json:"publishedAt,omitempty"`
+	AllowPublicAPIAccess  bool           `json:"allowPublicApiAccess,omitempty"`
+	UseForPages           bool           `json:"useForPages,omitempty"`
+	EnableChildTablePages bool           `json:"enableChildTablePages,omitempty"`
+	DynamicMetaTags       map[string]int `json:"dynamicMetaTags,omitempty"`
+	AllowChildTables      bool           `json:"allowChildTables,omitempty"`
+	CreatedAt             *time.Time     `json:"createdAt,omitempty"`
+	UpdatedAt             *time.Time     `json:"updatedAt,omitempty"`
+	Archived              bool           `json:"archived,omitempty"`
 }
 
 // HubDbTableRequest is the input for creating or updating a HubDB table.
 type HubDbTableRequest struct {
-	Name              string           `json:"name,omitempty"`
-	Label             string           `json:"label,omitempty"`
-	Columns           []*HubDbColumn   `json:"columns,omitempty"`
-	AllowPublicAPIAccess bool          `json:"allowPublicApiAccess,omitempty"`
-	UseForPages       bool             `json:"useForPages,omitempty"`
-	EnableChildTablePages bool         `json:"enableChildTablePages,omitempty"`
-	DynamicMetaTags   map[string]int   `json:"dynamicMetaTags,omitempty"`
-	AllowChildTables  bool             `json:"allowChildTables,omitempty"`
+	Name                  string         `json:"name,omitempty"`
+	Label                 string         `json:"label,omitempty"`
+	Columns               []*HubDbColumn `json:"columns,omitempty"`
+	AllowPublicAPIAccess  bool           `json:"allowPublicApiAccess,omitempty"`
+	UseForPages           bool           `json:"useForPages,omitempty"`
+	EnableChildTablePages bool           `json:"enableChildTablePages,omitempty"`
+	DynamicMetaTags       map[string]int `json:"dynamicMetaTags,omitempty"`
+	AllowChildTables      bool           `json:"allowChildTables,omitempty"`
 }
 
 // HubDbColumn represents a column in a HubDB table.
 type HubDbColumn struct {
-	Name         string   `json:"name,omitempty"`
-	Label        string   `json:"label,omitempty"`
-	ID           int      `json:"id,omitempty"`
-	Type         string   `json:"type,omitempty"`
-	Options      []HubDbColumnOption `json:"options,omitempty"`
-	Archived     bool     `json:"archived,omitempty"`
+	Name     string              `json:"name,omitempty"`
+	Label    string              `json:"label,omitempty"`
+	ID       int                 `json:"id,omitempty"`
+	Type     string              `json:"type,omitempty"`
+	Options  []HubDbColumnOption `json:"options,omitempty"`
+	Archived bool                `json:"archived,omitempty"`
 }
 
 // HubDbColumnOption represents an option for a select-type column.
@@ -322,21 +322,21 @@ type HubDbColumnOption struct {
 
 // HubDbTableRow represents a row in a HubDB table.
 type HubDbTableRow struct {
-	ID        string         `json:"id,omitempty"`
-	Path      string         `json:"path,omitempty"`
-	Name      string         `json:"name,omitempty"`
-	Values    map[string]any `json:"values,omitempty"`
-	ChildTableID string     `json:"childTableId,omitempty"`
-	CreatedAt *time.Time     `json:"createdAt,omitempty"`
-	UpdatedAt *time.Time     `json:"updatedAt,omitempty"`
+	ID           string         `json:"id,omitempty"`
+	Path         string         `json:"path,omitempty"`
+	Name         string         `json:"name,omitempty"`
+	Values       map[string]any `json:"values,omitempty"`
+	ChildTableID string         `json:"childTableId,omitempty"`
+	CreatedAt    *time.Time     `json:"createdAt,omitempty"`
+	UpdatedAt    *time.Time     `json:"updatedAt,omitempty"`
 }
 
 // HubDbTableRowRequest is the input for creating or updating a row.
 type HubDbTableRowRequest struct {
-	Path      string         `json:"path,omitempty"`
-	Name      string         `json:"name,omitempty"`
-	Values    map[string]any `json:"values,omitempty"`
-	ChildTableID string     `json:"childTableId,omitempty"`
+	Path         string         `json:"path,omitempty"`
+	Name         string         `json:"name,omitempty"`
+	Values       map[string]any `json:"values,omitempty"`
+	ChildTableID string         `json:"childTableId,omitempty"`
 }
 
 // HubDbTableRowBatchUpdateRequest is the input for batch updating a row.
@@ -361,18 +361,18 @@ type HubDbTableCloneRequest struct {
 
 // HubDbImportResult is the result of importing rows into a HubDB table.
 type HubDbImportResult struct {
-	RowsImported   int              `json:"rowsImported"`
-	DuplicateRows  int              `json:"duplicateRows"`
-	RowLimitExceeded bool           `json:"rowLimitExceeded"`
-	Errors         []StandardError  `json:"errors,omitempty"`
+	RowsImported     int             `json:"rowsImported"`
+	DuplicateRows    int             `json:"duplicateRows"`
+	RowLimitExceeded bool            `json:"rowLimitExceeded"`
+	Errors           []StandardError `json:"errors,omitempty"`
 }
 
 // --- HubDB list results ---
 
 // HubDbTableListResult is the paginated response for HubDB tables.
 type HubDbTableListResult struct {
-	Total   int           `json:"total"`
-	Results []*HubDbTable `json:"results"`
+	Total   int            `json:"total"`
+	Results []*HubDbTable  `json:"results"`
 	Paging  *ForwardPaging `json:"paging,omitempty"`
 }
 
@@ -414,32 +414,32 @@ type BatchResponseHubDbTableRow struct {
 
 // Domain represents a HubSpot domain.
 type Domain struct {
-	ID                       string     `json:"id"`
-	Domain                   string     `json:"domain"`
-	IsUsedForLandingPage     bool       `json:"isUsedForLandingPage"`
-	IsUsedForBlogPost        bool       `json:"isUsedForBlogPost"`
-	IsUsedForSitePage        bool       `json:"isUsedForSitePage"`
-	IsUsedForEmail           bool       `json:"isUsedForEmail"`
-	IsUsedForKnowledge       bool       `json:"isUsedForKnowledge"`
-	IsResolving              bool       `json:"isResolving"`
-	IsSslEnabled             *bool      `json:"isSslEnabled,omitempty"`
-	IsSslOnly                *bool      `json:"isSslOnly,omitempty"`
-	PrimaryBlogPost          *bool      `json:"primaryBlogPost,omitempty"`
-	PrimaryLandingPage       *bool      `json:"primaryLandingPage,omitempty"`
-	PrimarySitePage          *bool      `json:"primarySitePage,omitempty"`
-	PrimaryEmail             *bool      `json:"primaryEmail,omitempty"`
-	PrimaryKnowledge         *bool      `json:"primaryKnowledge,omitempty"`
-	SecondaryToDomain        string     `json:"secondaryToDomain,omitempty"`
-	ManuallyMarkedAsResolving bool      `json:"manuallyMarkedAsResolving,omitempty"`
-	CorrectCname             string     `json:"correctCname,omitempty"`
-	Created                  *time.Time `json:"created,omitempty"`
-	Updated                  *time.Time `json:"updated,omitempty"`
+	ID                        string     `json:"id"`
+	Domain                    string     `json:"domain"`
+	IsUsedForLandingPage      bool       `json:"isUsedForLandingPage"`
+	IsUsedForBlogPost         bool       `json:"isUsedForBlogPost"`
+	IsUsedForSitePage         bool       `json:"isUsedForSitePage"`
+	IsUsedForEmail            bool       `json:"isUsedForEmail"`
+	IsUsedForKnowledge        bool       `json:"isUsedForKnowledge"`
+	IsResolving               bool       `json:"isResolving"`
+	IsSslEnabled              *bool      `json:"isSslEnabled,omitempty"`
+	IsSslOnly                 *bool      `json:"isSslOnly,omitempty"`
+	PrimaryBlogPost           *bool      `json:"primaryBlogPost,omitempty"`
+	PrimaryLandingPage        *bool      `json:"primaryLandingPage,omitempty"`
+	PrimarySitePage           *bool      `json:"primarySitePage,omitempty"`
+	PrimaryEmail              *bool      `json:"primaryEmail,omitempty"`
+	PrimaryKnowledge          *bool      `json:"primaryKnowledge,omitempty"`
+	SecondaryToDomain         string     `json:"secondaryToDomain,omitempty"`
+	ManuallyMarkedAsResolving bool       `json:"manuallyMarkedAsResolving,omitempty"`
+	CorrectCname              string     `json:"correctCname,omitempty"`
+	Created                   *time.Time `json:"created,omitempty"`
+	Updated                   *time.Time `json:"updated,omitempty"`
 }
 
 // DomainListResult is the paginated response for domains.
 type DomainListResult struct {
-	Total   int        `json:"total"`
-	Results []*Domain  `json:"results"`
+	Total   int            `json:"total"`
+	Results []*Domain      `json:"results"`
 	Paging  *ForwardPaging `json:"paging,omitempty"`
 }
 
@@ -447,45 +447,45 @@ type DomainListResult struct {
 
 // Page represents a HubSpot CMS page (landing page or site page).
 type Page struct {
-	ID                    string     `json:"id,omitempty"`
-	Name                  string     `json:"name,omitempty"`
-	Slug                  string     `json:"slug,omitempty"`
-	State                 string     `json:"state,omitempty"`
-	Domain                string     `json:"domain,omitempty"`
-	Subcategory           string     `json:"subcategory,omitempty"`
-	ContentGroupID        string     `json:"contentGroupId,omitempty"`
-	Campaign              string     `json:"campaign,omitempty"`
-	HtmlTitle             string     `json:"htmlTitle,omitempty"`
-	MetaDescription       string     `json:"metaDescription,omitempty"`
-	Language              string     `json:"language,omitempty"`
-	TranslatedFromID      string     `json:"translatedFromId,omitempty"`
-	FeaturedImage         string     `json:"featuredImage,omitempty"`
-	FeaturedImageAltText  string     `json:"featuredImageAltText,omitempty"`
-	TemplateID            string     `json:"templateId,omitempty"`
-	TemplatePath          string     `json:"templatePath,omitempty"`
-	CurrentState          string     `json:"currentState,omitempty"`
-	PublishDate           *time.Time `json:"publishDate,omitempty"`
-	Created               *time.Time `json:"created,omitempty"`
-	Updated               *time.Time `json:"updated,omitempty"`
-	ArchivedAt            *time.Time `json:"archivedAt,omitempty"`
-	Archived              bool       `json:"archived,omitempty"`
-	URL                   string     `json:"url,omitempty"`
+	ID                   string     `json:"id,omitempty"`
+	Name                 string     `json:"name,omitempty"`
+	Slug                 string     `json:"slug,omitempty"`
+	State                string     `json:"state,omitempty"`
+	Domain               string     `json:"domain,omitempty"`
+	Subcategory          string     `json:"subcategory,omitempty"`
+	ContentGroupID       string     `json:"contentGroupId,omitempty"`
+	Campaign             string     `json:"campaign,omitempty"`
+	HtmlTitle            string     `json:"htmlTitle,omitempty"`
+	MetaDescription      string     `json:"metaDescription,omitempty"`
+	Language             string     `json:"language,omitempty"`
+	TranslatedFromID     string     `json:"translatedFromId,omitempty"`
+	FeaturedImage        string     `json:"featuredImage,omitempty"`
+	FeaturedImageAltText string     `json:"featuredImageAltText,omitempty"`
+	TemplateID           string     `json:"templateId,omitempty"`
+	TemplatePath         string     `json:"templatePath,omitempty"`
+	CurrentState         string     `json:"currentState,omitempty"`
+	PublishDate          *time.Time `json:"publishDate,omitempty"`
+	Created              *time.Time `json:"created,omitempty"`
+	Updated              *time.Time `json:"updated,omitempty"`
+	ArchivedAt           *time.Time `json:"archivedAt,omitempty"`
+	Archived             bool       `json:"archived,omitempty"`
+	URL                  string     `json:"url,omitempty"`
 }
 
 // ContentFolder represents a content folder in the CMS.
 type ContentFolder struct {
-	ID        string     `json:"id,omitempty"`
-	Name      string     `json:"name,omitempty"`
-	ParentFolderID string `json:"parentFolderId,omitempty"`
-	Created   *time.Time `json:"created,omitempty"`
-	Updated   *time.Time `json:"updated,omitempty"`
-	Archived  bool       `json:"archived,omitempty"`
+	ID             string     `json:"id,omitempty"`
+	Name           string     `json:"name,omitempty"`
+	ParentFolderID string     `json:"parentFolderId,omitempty"`
+	Created        *time.Time `json:"created,omitempty"`
+	Updated        *time.Time `json:"updated,omitempty"`
+	Archived       bool       `json:"archived,omitempty"`
 }
 
 // VersionPage represents a previous version of a page.
 type VersionPage struct {
-	Object *Page `json:"object,omitempty"`
-	User   *User `json:"user,omitempty"`
+	Object *Page  `json:"object,omitempty"`
+	User   *User  `json:"user,omitempty"`
 	ID     string `json:"id"`
 }
 
@@ -536,11 +536,11 @@ type BatchInputPage struct {
 
 // BatchResponsePage is the response for batch page operations.
 type BatchResponsePage struct {
-	Status      string      `json:"status"`
-	Results     []*Page     `json:"results"`
-	StartedAt   time.Time   `json:"startedAt"`
-	CompletedAt time.Time   `json:"completedAt"`
-	NumErrors   int         `json:"numErrors,omitempty"`
+	Status      string          `json:"status"`
+	Results     []*Page         `json:"results"`
+	StartedAt   time.Time       `json:"startedAt"`
+	CompletedAt time.Time       `json:"completedAt"`
+	NumErrors   int             `json:"numErrors,omitempty"`
 	Errors      []StandardError `json:"errors,omitempty"`
 }
 
@@ -551,20 +551,20 @@ type BatchInputContentFolder struct {
 
 // BatchResponseContentFolder is the response for batch folder operations.
 type BatchResponseContentFolder struct {
-	Status      string            `json:"status"`
-	Results     []*ContentFolder  `json:"results"`
-	StartedAt   time.Time         `json:"startedAt"`
-	CompletedAt time.Time         `json:"completedAt"`
-	NumErrors   int               `json:"numErrors,omitempty"`
-	Errors      []StandardError   `json:"errors,omitempty"`
+	Status      string           `json:"status"`
+	Results     []*ContentFolder `json:"results"`
+	StartedAt   time.Time        `json:"startedAt"`
+	CompletedAt time.Time        `json:"completedAt"`
+	NumErrors   int              `json:"numErrors,omitempty"`
+	Errors      []StandardError  `json:"errors,omitempty"`
 }
 
 // --- Page list results ---
 
 // PageListResult is the paginated response for pages.
 type PageListResult struct {
-	Total   int        `json:"total"`
-	Results []*Page    `json:"results"`
+	Total   int            `json:"total"`
+	Results []*Page        `json:"results"`
 	Paging  *ForwardPaging `json:"paging,omitempty"`
 }
 
@@ -633,39 +633,39 @@ const (
 
 // UrlMapping represents a URL redirect (URL mapping).
 type UrlMapping struct {
-	ID                     string     `json:"id"`
-	RoutePrefix            string     `json:"routePrefix"`
-	Destination            string     `json:"destination"`
-	RedirectStyle          int        `json:"redirectStyle"`
-	IsTrailingSlashOptional bool      `json:"isTrailingSlashOptional"`
-	IsMatchQueryString     bool       `json:"isMatchQueryString"`
-	IsMatchFullUrl         bool       `json:"isMatchFullUrl"`
-	IsOnlyAfterNotFound    bool       `json:"isOnlyAfterNotFound"`
-	IsPattern              bool       `json:"isPattern"`
-	IsProtocolAgnostic     bool       `json:"isProtocolAgnostic"`
-	Precedence             int        `json:"precedence"`
-	Created                *time.Time `json:"created,omitempty"`
-	Updated                *time.Time `json:"updated,omitempty"`
+	ID                      string     `json:"id"`
+	RoutePrefix             string     `json:"routePrefix"`
+	Destination             string     `json:"destination"`
+	RedirectStyle           int        `json:"redirectStyle"`
+	IsTrailingSlashOptional bool       `json:"isTrailingSlashOptional"`
+	IsMatchQueryString      bool       `json:"isMatchQueryString"`
+	IsMatchFullUrl          bool       `json:"isMatchFullUrl"`
+	IsOnlyAfterNotFound     bool       `json:"isOnlyAfterNotFound"`
+	IsPattern               bool       `json:"isPattern"`
+	IsProtocolAgnostic      bool       `json:"isProtocolAgnostic"`
+	Precedence              int        `json:"precedence"`
+	Created                 *time.Time `json:"created,omitempty"`
+	Updated                 *time.Time `json:"updated,omitempty"`
 }
 
 // UrlMappingCreateRequest is the input for creating a URL redirect.
 type UrlMappingCreateRequest struct {
-	RoutePrefix            string `json:"routePrefix"`
-	Destination            string `json:"destination"`
-	RedirectStyle          int    `json:"redirectStyle"`
-	IsTrailingSlashOptional *bool `json:"isTrailingSlashOptional,omitempty"`
-	IsMatchQueryString     *bool  `json:"isMatchQueryString,omitempty"`
-	IsMatchFullUrl         *bool  `json:"isMatchFullUrl,omitempty"`
-	IsOnlyAfterNotFound    *bool  `json:"isOnlyAfterNotFound,omitempty"`
-	IsPattern              *bool  `json:"isPattern,omitempty"`
-	IsProtocolAgnostic     *bool  `json:"isProtocolAgnostic,omitempty"`
-	Precedence             *int   `json:"precedence,omitempty"`
+	RoutePrefix             string `json:"routePrefix"`
+	Destination             string `json:"destination"`
+	RedirectStyle           int    `json:"redirectStyle"`
+	IsTrailingSlashOptional *bool  `json:"isTrailingSlashOptional,omitempty"`
+	IsMatchQueryString      *bool  `json:"isMatchQueryString,omitempty"`
+	IsMatchFullUrl          *bool  `json:"isMatchFullUrl,omitempty"`
+	IsOnlyAfterNotFound     *bool  `json:"isOnlyAfterNotFound,omitempty"`
+	IsPattern               *bool  `json:"isPattern,omitempty"`
+	IsProtocolAgnostic      *bool  `json:"isProtocolAgnostic,omitempty"`
+	Precedence              *int   `json:"precedence,omitempty"`
 }
 
 // UrlMappingListResult is the paginated response for URL redirects.
 type UrlMappingListResult struct {
-	Total   int           `json:"total"`
-	Results []*UrlMapping `json:"results"`
+	Total   int            `json:"total"`
+	Results []*UrlMapping  `json:"results"`
 	Paging  *ForwardPaging `json:"paging,omitempty"`
 }
 
@@ -673,14 +673,14 @@ type UrlMappingListResult struct {
 
 // AssetFileMetadata represents metadata for a source code file.
 type AssetFileMetadata struct {
-	ID        string   `json:"id"`
-	Name      string   `json:"name"`
-	Folder    bool     `json:"folder"`
-	Children  []string `json:"children,omitempty"`
-	Hash      string   `json:"hash,omitempty"`
-	CreatedAt int64    `json:"createdAt"`
-	UpdatedAt int64    `json:"updatedAt"`
-	ArchivedAt int64   `json:"archivedAt,omitempty"`
+	ID         string   `json:"id"`
+	Name       string   `json:"name"`
+	Folder     bool     `json:"folder"`
+	Children   []string `json:"children,omitempty"`
+	Hash       string   `json:"hash,omitempty"`
+	CreatedAt  int64    `json:"createdAt"`
+	UpdatedAt  int64    `json:"updatedAt"`
+	ArchivedAt int64    `json:"archivedAt,omitempty"`
 }
 
 // FileExtractRequest is the input for async file extraction.
@@ -690,19 +690,19 @@ type FileExtractRequest struct {
 
 // TaskLocator is the response when starting an async task.
 type TaskLocator struct {
-	ID    int    `json:"id"`
+	ID    int               `json:"id"`
 	Links map[string]string `json:"links,omitempty"`
 }
 
 // ActionResponse is the response for checking async task status.
 type ActionResponse struct {
-	Status      string     `json:"status"`
-	RequestedAt *time.Time `json:"requestedAt,omitempty"`
-	StartedAt   *time.Time `json:"startedAt,omitempty"`
-	CompletedAt *time.Time `json:"completedAt,omitempty"`
+	Status      string            `json:"status"`
+	RequestedAt *time.Time        `json:"requestedAt,omitempty"`
+	StartedAt   *time.Time        `json:"startedAt,omitempty"`
+	CompletedAt *time.Time        `json:"completedAt,omitempty"`
 	Links       map[string]string `json:"links,omitempty"`
-	NumErrors   int        `json:"numErrors,omitempty"`
-	Errors      []StandardError `json:"errors,omitempty"`
+	NumErrors   int               `json:"numErrors,omitempty"`
+	Errors      []StandardError   `json:"errors,omitempty"`
 }
 
 // --- Site search models ---
@@ -740,16 +740,16 @@ type SearchResults struct {
 
 // IndexedData represents indexed data for a content item.
 type IndexedData struct {
-	ID     string                    `json:"id"`
-	Type   string                    `json:"type"`
-	Fields map[string]*IndexedField  `json:"fields,omitempty"`
+	ID     string                   `json:"id"`
+	Type   string                   `json:"type"`
+	Fields map[string]*IndexedField `json:"fields,omitempty"`
 }
 
 // IndexedField represents a single indexed field.
 type IndexedField struct {
-	Name   string   `json:"name,omitempty"`
-	Value  any      `json:"value,omitempty"`
-	Values []any    `json:"values,omitempty"`
+	Name   string `json:"name,omitempty"`
+	Value  any    `json:"value,omitempty"`
+	Values []any  `json:"values,omitempty"`
 }
 
 // Content type constants used by site search.
@@ -765,28 +765,28 @@ const (
 
 // PerformanceView represents performance data for a single time interval.
 type PerformanceView struct {
-	StartTimestamp       int64   `json:"startTimestamp"`
-	EndTimestamp         int64   `json:"endTimestamp"`
-	StartDatetime        string  `json:"startDatetime,omitempty"`
-	EndDatetime          string  `json:"endDatetime,omitempty"`
-	TotalRequests        int     `json:"totalRequests"`
-	CacheHits            int     `json:"cacheHits"`
-	CacheHitRate         float64 `json:"cacheHitRate"`
-	TotalRequestTime     *int    `json:"totalRequestTime,omitempty"`
-	AvgOriginResponseTime int    `json:"avgOriginResponseTime"`
-	ResponseTimeMs       int     `json:"responseTimeMs"`
-	Status100x           int     `json:"100X"`
-	Status20x            int     `json:"20X"`
-	Status30x            int     `json:"30X"`
-	Status40x            int     `json:"40X"`
-	Status50x            int     `json:"50X"`
-	Status403            int     `json:"403"`
-	Status404            int     `json:"404"`
-	Status500            int     `json:"500"`
-	Status504            int     `json:"504"`
-	Percentile50th       int     `json:"50th"`
-	Percentile95th       int     `json:"95th"`
-	Percentile99th       int     `json:"99th"`
+	StartTimestamp        int64   `json:"startTimestamp"`
+	EndTimestamp          int64   `json:"endTimestamp"`
+	StartDatetime         string  `json:"startDatetime,omitempty"`
+	EndDatetime           string  `json:"endDatetime,omitempty"`
+	TotalRequests         int     `json:"totalRequests"`
+	CacheHits             int     `json:"cacheHits"`
+	CacheHitRate          float64 `json:"cacheHitRate"`
+	TotalRequestTime      *int    `json:"totalRequestTime,omitempty"`
+	AvgOriginResponseTime int     `json:"avgOriginResponseTime"`
+	ResponseTimeMs        int     `json:"responseTimeMs"`
+	Status100x            int     `json:"100X"`
+	Status20x             int     `json:"20X"`
+	Status30x             int     `json:"30X"`
+	Status40x             int     `json:"40X"`
+	Status50x             int     `json:"50X"`
+	Status403             int     `json:"403"`
+	Status404             int     `json:"404"`
+	Status500             int     `json:"500"`
+	Status504             int     `json:"504"`
+	Percentile50th        int     `json:"50th"`
+	Percentile95th        int     `json:"95th"`
+	Percentile99th        int     `json:"99th"`
 }
 
 // PerformanceResponse is the response for performance data queries.

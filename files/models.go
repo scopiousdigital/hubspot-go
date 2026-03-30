@@ -34,13 +34,13 @@ type File struct {
 
 // FileUpdateInput is the input for updating file properties.
 type FileUpdateInput struct {
-	Access           string     `json:"access,omitempty"`
-	ParentFolderID   string     `json:"parentFolderId,omitempty"`
-	Name             string     `json:"name,omitempty"`
-	ParentFolderPath string     `json:"parentFolderPath,omitempty"`
-	ClearExpires     *bool      `json:"clearExpires,omitempty"`
-	IsUsableInContent *bool     `json:"isUsableInContent,omitempty"`
-	ExpiresAt        *time.Time `json:"expiresAt,omitempty"`
+	Access            string     `json:"access,omitempty"`
+	ParentFolderID    string     `json:"parentFolderId,omitempty"`
+	Name              string     `json:"name,omitempty"`
+	ParentFolderPath  string     `json:"parentFolderPath,omitempty"`
+	ClearExpires      *bool      `json:"clearExpires,omitempty"`
+	IsUsableInContent *bool      `json:"isUsableInContent,omitempty"`
+	ExpiresAt         *time.Time `json:"expiresAt,omitempty"`
 }
 
 // FileSearchOptions contains query parameters for searching files.
@@ -159,14 +159,14 @@ type ImportFromURLTaskLocator struct {
 
 // SignedURL is a temporary signed URL for accessing a file.
 type SignedURL struct {
-	Extension string     `json:"extension"`
-	Size      int64      `json:"size"`
-	Name      string     `json:"name"`
-	Width     *int       `json:"width,omitempty"`
-	Type      string     `json:"type"`
-	URL       string     `json:"url"`
-	ExpiresAt time.Time  `json:"expiresAt"`
-	Height    *int       `json:"height,omitempty"`
+	Extension string    `json:"extension"`
+	Size      int64     `json:"size"`
+	Name      string    `json:"name"`
+	Width     *int      `json:"width,omitempty"`
+	Type      string    `json:"type"`
+	URL       string    `json:"url"`
+	ExpiresAt time.Time `json:"expiresAt"`
+	Height    *int      `json:"height,omitempty"`
 }
 
 // --- Collection responses ---

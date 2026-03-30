@@ -150,8 +150,8 @@ func TestSettings_Configure(t *testing.T) {
 		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(mustJSON(t, webhooks.SettingsResponse{
-			CreatedAt: time.Now(),
-			TargetURL: input.TargetURL,
+			CreatedAt:  time.Now(),
+			TargetURL:  input.TargetURL,
 			Throttling: input.Throttling,
 		}))
 	})

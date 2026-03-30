@@ -118,4 +118,3 @@ func (s *SubscriptionsService) BatchUpdate(ctx context.Context, appID int64, inp
 	}
 	return &result, nil
 }
-

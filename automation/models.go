@@ -24,60 +24,60 @@ type BatchInputCallbackCompletionBatchRequest struct {
 
 // PublicActionDefinition represents a custom workflow action definition.
 type PublicActionDefinition struct {
-	Functions             []PublicActionFunctionIdentifier `json:"functions"`
-	ActionURL             string                          `json:"actionUrl"`
-	Published             bool                            `json:"published"`
-	Labels                map[string]PublicActionLabels    `json:"labels"`
-	InputFields           []InputFieldDefinition          `json:"inputFields"`
-	OutputFields          []OutputFieldDefinition         `json:"outputFields,omitempty"`
-	RevisionID            string                          `json:"revisionId"`
-	ArchivedAt            *int64                          `json:"archivedAt,omitempty"`
-	InputFieldDependencies []map[string]any               `json:"inputFieldDependencies,omitempty"`
-	ExecutionRules        []PublicExecutionTranslationRule `json:"executionRules,omitempty"`
-	ID                    string                          `json:"id"`
-	ObjectTypes           []string                        `json:"objectTypes"`
-	ObjectRequestOptions  *PublicObjectRequestOptions     `json:"objectRequestOptions,omitempty"`
+	Functions              []PublicActionFunctionIdentifier `json:"functions"`
+	ActionURL              string                           `json:"actionUrl"`
+	Published              bool                             `json:"published"`
+	Labels                 map[string]PublicActionLabels    `json:"labels"`
+	InputFields            []InputFieldDefinition           `json:"inputFields"`
+	OutputFields           []OutputFieldDefinition          `json:"outputFields,omitempty"`
+	RevisionID             string                           `json:"revisionId"`
+	ArchivedAt             *int64                           `json:"archivedAt,omitempty"`
+	InputFieldDependencies []map[string]any                 `json:"inputFieldDependencies,omitempty"`
+	ExecutionRules         []PublicExecutionTranslationRule `json:"executionRules,omitempty"`
+	ID                     string                           `json:"id"`
+	ObjectTypes            []string                         `json:"objectTypes"`
+	ObjectRequestOptions   *PublicObjectRequestOptions      `json:"objectRequestOptions,omitempty"`
 }
 
 // PublicActionDefinitionEgg is the input for creating a new action definition.
 type PublicActionDefinitionEgg struct {
-	InputFields           []InputFieldDefinition          `json:"inputFields"`
-	OutputFields          []OutputFieldDefinition         `json:"outputFields,omitempty"`
-	ArchivedAt            *int64                          `json:"archivedAt,omitempty"`
-	Functions             []PublicActionFunction           `json:"functions"`
-	ActionURL             string                          `json:"actionUrl"`
-	InputFieldDependencies []map[string]any               `json:"inputFieldDependencies,omitempty"`
-	Published             bool                            `json:"published"`
-	ExecutionRules        []PublicExecutionTranslationRule `json:"executionRules,omitempty"`
-	ObjectTypes           []string                        `json:"objectTypes"`
-	ObjectRequestOptions  *PublicObjectRequestOptions     `json:"objectRequestOptions,omitempty"`
-	Labels                map[string]PublicActionLabels    `json:"labels"`
+	InputFields            []InputFieldDefinition           `json:"inputFields"`
+	OutputFields           []OutputFieldDefinition          `json:"outputFields,omitempty"`
+	ArchivedAt             *int64                           `json:"archivedAt,omitempty"`
+	Functions              []PublicActionFunction           `json:"functions"`
+	ActionURL              string                           `json:"actionUrl"`
+	InputFieldDependencies []map[string]any                 `json:"inputFieldDependencies,omitempty"`
+	Published              bool                             `json:"published"`
+	ExecutionRules         []PublicExecutionTranslationRule `json:"executionRules,omitempty"`
+	ObjectTypes            []string                         `json:"objectTypes"`
+	ObjectRequestOptions   *PublicObjectRequestOptions      `json:"objectRequestOptions,omitempty"`
+	Labels                 map[string]PublicActionLabels    `json:"labels"`
 }
 
 // PublicActionDefinitionPatch is the input for updating an action definition.
 type PublicActionDefinitionPatch struct {
-	InputFields           []InputFieldDefinition          `json:"inputFields,omitempty"`
-	OutputFields          []OutputFieldDefinition         `json:"outputFields,omitempty"`
-	ActionURL             string                          `json:"actionUrl,omitempty"`
-	InputFieldDependencies []map[string]any               `json:"inputFieldDependencies,omitempty"`
-	Published             *bool                           `json:"published,omitempty"`
-	ExecutionRules        []PublicExecutionTranslationRule `json:"executionRules,omitempty"`
-	ObjectTypes           []string                        `json:"objectTypes,omitempty"`
-	ObjectRequestOptions  *PublicObjectRequestOptions     `json:"objectRequestOptions,omitempty"`
-	Labels                map[string]PublicActionLabels    `json:"labels,omitempty"`
+	InputFields            []InputFieldDefinition           `json:"inputFields,omitempty"`
+	OutputFields           []OutputFieldDefinition          `json:"outputFields,omitempty"`
+	ActionURL              string                           `json:"actionUrl,omitempty"`
+	InputFieldDependencies []map[string]any                 `json:"inputFieldDependencies,omitempty"`
+	Published              *bool                            `json:"published,omitempty"`
+	ExecutionRules         []PublicExecutionTranslationRule `json:"executionRules,omitempty"`
+	ObjectTypes            []string                         `json:"objectTypes,omitempty"`
+	ObjectRequestOptions   *PublicObjectRequestOptions      `json:"objectRequestOptions,omitempty"`
+	Labels                 map[string]PublicActionLabels    `json:"labels,omitempty"`
 }
 
 // PublicActionLabels contains label information for an action.
 type PublicActionLabels struct {
-	InputFieldDescriptions  map[string]string            `json:"inputFieldDescriptions,omitempty"`
-	AppDisplayName          string                       `json:"appDisplayName,omitempty"`
-	OutputFieldLabels       map[string]string            `json:"outputFieldLabels,omitempty"`
-	InputFieldOptionLabels  map[string]map[string]string `json:"inputFieldOptionLabels,omitempty"`
-	ActionDescription       string                       `json:"actionDescription,omitempty"`
-	ExecutionRules          map[string]string            `json:"executionRules,omitempty"`
-	InputFieldLabels        map[string]string            `json:"inputFieldLabels,omitempty"`
-	ActionName              string                       `json:"actionName"`
-	ActionCardContent       string                       `json:"actionCardContent,omitempty"`
+	InputFieldDescriptions map[string]string            `json:"inputFieldDescriptions,omitempty"`
+	AppDisplayName         string                       `json:"appDisplayName,omitempty"`
+	OutputFieldLabels      map[string]string            `json:"outputFieldLabels,omitempty"`
+	InputFieldOptionLabels map[string]map[string]string `json:"inputFieldOptionLabels,omitempty"`
+	ActionDescription      string                       `json:"actionDescription,omitempty"`
+	ExecutionRules         map[string]string            `json:"executionRules,omitempty"`
+	InputFieldLabels       map[string]string            `json:"inputFieldLabels,omitempty"`
+	ActionName             string                       `json:"actionName"`
+	ActionCardContent      string                       `json:"actionCardContent,omitempty"`
 }
 
 // InputFieldDefinition describes an input field for an action.
@@ -154,10 +154,10 @@ type FunctionsResult struct {
 
 // PublicActionRevision represents a revision of an action definition.
 type PublicActionRevision struct {
-	RevisionID string                  `json:"revisionId"`
-	CreatedAt  time.Time               `json:"createdAt"`
-	Definition PublicActionDefinition  `json:"definition"`
-	ID         string                  `json:"id"`
+	RevisionID string                 `json:"revisionId"`
+	CreatedAt  time.Time              `json:"createdAt"`
+	Definition PublicActionDefinition `json:"definition"`
+	ID         string                 `json:"id"`
 }
 
 // --- List result types ---

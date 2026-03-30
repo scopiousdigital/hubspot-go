@@ -55,64 +55,70 @@ func (s *EmailsService) GetByID(ctx context.Context, emailID string, opts *Email
 	return &result, nil
 }
 
+// values encodes the list options as URL query parameters.
+func (o *EmailListOptions) values() url.Values {
+	q := url.Values{}
+	if o == nil {
+		return q
+	}
+	if o.After != "" {
+		q.Set("after", o.After)
+	}
+	if o.Limit > 0 {
+		q.Set("limit", strconv.Itoa(o.Limit))
+	}
+	if len(o.Sort) > 0 {
+		q.Set("sort", strings.Join(o.Sort, ","))
+	}
+	if o.Type != "" {
+		q.Set("type", o.Type)
+	}
+	if o.IsPublished != nil {
+		q.Set("isPublished", strconv.FormatBool(*o.IsPublished))
+	}
+	if o.Archived != nil && *o.Archived {
+		q.Set("archived", "true")
+	}
+	if o.Campaign != "" {
+		q.Set("campaign", o.Campaign)
+	}
+	if o.IncludeStats != nil && *o.IncludeStats {
+		q.Set("includeStats", "true")
+	}
+	if o.MarketingCampaignNames != nil && *o.MarketingCampaignNames {
+		q.Set("marketingCampaignNames", "true")
+	}
+	if o.WorkflowNames != nil && *o.WorkflowNames {
+		q.Set("workflowNames", "true")
+	}
+	if len(o.IncludedProperties) > 0 {
+		q.Set("includedProperties", strings.Join(o.IncludedProperties, ","))
+	}
+	if o.CreatedAt != "" {
+		q.Set("createdAt", o.CreatedAt)
+	}
+	if o.CreatedAfter != "" {
+		q.Set("createdAfter", o.CreatedAfter)
+	}
+	if o.CreatedBefore != "" {
+		q.Set("createdBefore", o.CreatedBefore)
+	}
+	if o.UpdatedAt != "" {
+		q.Set("updatedAt", o.UpdatedAt)
+	}
+	if o.UpdatedAfter != "" {
+		q.Set("updatedAfter", o.UpdatedAfter)
+	}
+	if o.UpdatedBefore != "" {
+		q.Set("updatedBefore", o.UpdatedBefore)
+	}
+	return q
+}
+
 // GetPage retrieves a paginated list of marketing emails.
 func (s *EmailsService) GetPage(ctx context.Context, opts *EmailListOptions) (*EmailListResult, error) {
-	q := url.Values{}
-	if opts != nil {
-		if opts.After != "" {
-			q.Set("after", opts.After)
-		}
-		if opts.Limit > 0 {
-			q.Set("limit", strconv.Itoa(opts.Limit))
-		}
-		if len(opts.Sort) > 0 {
-			q.Set("sort", strings.Join(opts.Sort, ","))
-		}
-		if opts.Type != "" {
-			q.Set("type", opts.Type)
-		}
-		if opts.IsPublished != nil {
-			q.Set("isPublished", strconv.FormatBool(*opts.IsPublished))
-		}
-		if opts.Archived != nil && *opts.Archived {
-			q.Set("archived", "true")
-		}
-		if opts.Campaign != "" {
-			q.Set("campaign", opts.Campaign)
-		}
-		if opts.IncludeStats != nil && *opts.IncludeStats {
-			q.Set("includeStats", "true")
-		}
-		if opts.MarketingCampaignNames != nil && *opts.MarketingCampaignNames {
-			q.Set("marketingCampaignNames", "true")
-		}
-		if opts.WorkflowNames != nil && *opts.WorkflowNames {
-			q.Set("workflowNames", "true")
-		}
-		if len(opts.IncludedProperties) > 0 {
-			q.Set("includedProperties", strings.Join(opts.IncludedProperties, ","))
-		}
-		if opts.CreatedAt != "" {
-			q.Set("createdAt", opts.CreatedAt)
-		}
-		if opts.CreatedAfter != "" {
-			q.Set("createdAfter", opts.CreatedAfter)
-		}
-		if opts.CreatedBefore != "" {
-			q.Set("createdBefore", opts.CreatedBefore)
-		}
-		if opts.UpdatedAt != "" {
-			q.Set("updatedAt", opts.UpdatedAt)
-		}
-		if opts.UpdatedAfter != "" {
-			q.Set("updatedAfter", opts.UpdatedAfter)
-		}
-		if opts.UpdatedBefore != "" {
-			q.Set("updatedBefore", opts.UpdatedBefore)
-		}
-	}
 	var result EmailListResult
-	if err := s.requester.Get(ctx, emailsBasePath, q, &result); err != nil {
+	if err := s.requester.Get(ctx, emailsBasePath, opts.values(), &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

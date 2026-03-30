@@ -9,13 +9,13 @@ type Service struct {
 	requester api.Requester
 
 	// Standard CRM object services — all share the same CRUD/batch/search pattern.
-	Contacts     *ObjectService
-	Companies    *ObjectService
-	Deals        *ObjectService
-	Tickets      *ObjectService
-	Products     *ObjectService
-	LineItems    *ObjectService
-	Quotes       *ObjectService
+	Contacts  *ObjectService
+	Companies *ObjectService
+	Deals     *ObjectService
+	Tickets   *ObjectService
+	Products  *ObjectService
+	LineItems *ObjectService
+	Quotes    *ObjectService
 
 	// Activity objects
 	Calls          *ObjectService

@@ -484,8 +484,8 @@ func TestSchemas_Create(t *testing.T) {
 	})
 
 	schema, err := svc.Schemas.Create(context.Background(), &crm.ObjectSchemaEgg{
-		Name: "cars",
-		Labels: crm.ObjectTypeDefinitionLabels{Singular: "Car", Plural: "Cars"},
+		Name:               "cars",
+		Labels:             crm.ObjectTypeDefinitionLabels{Singular: "Car", Plural: "Cars"},
 		RequiredProperties: []string{"make"},
 		Properties: []crm.ObjectTypePropertyCreate{
 			{Name: "make", Label: "Make", Type: "string", FieldType: "text"},
@@ -1333,8 +1333,8 @@ func TestExtensions_CreateCard(t *testing.T) {
 		}
 		w.WriteHeader(http.StatusCreated)
 		w.Write(mustJSON(t, crm.PublicCardResponse{
-			ID:    "card1",
-			Title: "Test Card",
+			ID:        "card1",
+			Title:     "Test Card",
 			CreatedAt: time.Now(),
 			UpdatedAt: time.Now(),
 		}))
