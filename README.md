@@ -293,3 +293,5 @@ hubspot-go/
 ## License
 
 MIT
+
+Maintained by [Scopious Digital](https://www.scopiousdigital.com/?utm_source=github&utm_medium=readme&utm_campaign=hubspot-go). We build HubSpot integrations and white-label dev for HubSpot agencies.
